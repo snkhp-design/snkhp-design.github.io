@@ -240,61 +240,61 @@ const ICON_DARK  = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.or
 /* cx / cy: world coordinates of each card's centre, 01 sits at the origin.
    Positions traced from Anna's own arrangement. rot = tilt in degrees. */
 const CARDS = [
-  { id:"salmon",    n:"01",    tag:"fintech",        title:"Salmon Bank",              cx:0,     cy:0,     rot:-1.25, w:560, img:"salmon", ratio:"900/593" },
+  { id:"salmon",    n:"01",    tag:"fintech",        title:"Salmon Bank",              cx:0,     cy:0,     rot:-1.25, w:560, img:"salmon", ratio:"1080/712" },
 
-  { id:"inhouse",   n:"01-01", tag:"fintech",        title:"Salmon In-house Projects", cx:345,   cy:-556,  rot:2.25,  w:560, parent:"salmon", img:"inhouse", ratio:"900/667" },
-  { id:"agent",     n:"01-02", tag:"fintech",        title:"Salmon Agent App",         cx:654,   cy:323,   rot:-3,   w:560, parent:"salmon", img:"agent", ratio:"900/667" },
-  { id:"portal",    n:"01-03", tag:"fintech",        title:"Salmon Merchant Portal",   cx:-255,  cy:620,   rot:3.75,  w:560, parent:"salmon", img:"portal", ratio:"900/667" },
-  { id:"referral",  n:"01-04", tag:"fintech",        title:"Salmon Referral Program",  cx:-675,  cy:-397,  rot:-1.75, w:560, parent:"salmon", img:"referral", ratio:"900/667" },
+  { id:"inhouse",   n:"01-01", tag:"fintech",        title:"Salmon In-house Projects", cx:345,   cy:-556,  rot:2.25,  w:560, parent:"salmon", img:"inhouse", ratio:"1080/800" },
+  { id:"agent",     n:"01-02", tag:"fintech",        title:"Salmon Agent App",         cx:654,   cy:323,   rot:-3,   w:560, parent:"salmon", img:"agent", ratio:"1080/800" },
+  { id:"portal",    n:"01-03", tag:"fintech",        title:"Salmon Merchant Portal",   cx:-255,  cy:620,   rot:3.75,  w:560, parent:"salmon", img:"portal", ratio:"1080/800" },
+  { id:"referral",  n:"01-04", tag:"fintech",        title:"Salmon Referral Program",  cx:-675,  cy:-397,  rot:-1.75, w:560, parent:"salmon", img:"referral", ratio:"1080/800" },
 
-  { id:"kalda",     n:"02",    tag:"wellbeing",      title:"Kalda App",                cx:1359,  cy:-400,  rot:2.75,  w:560, img:"kalda", ratio:"900/667" },
-  { id:"talentum",  n:"03",    tag:"web3",           title:"Talentum Web3 Platform",   cx:-395,  cy:-1109, rot:-4,   w:560, img:"talentum", ratio:"900/667" },
-  { id:"tripment",  n:"04",    tag:"healthtech",     title:"Tripment Health",          cx:-1256, cy:330,   rot:1.5,    w:560, img:"tripment", ratio:"900/667" },
-  { id:"megadisk",  n:"05",    tag:"cloud storage",  title:"MegaDisk App",             cx:-1455, cy:-813,  rot:-2.25, w:560, img:"megadisk", ratio:"900/667" },
-  { id:"nologo",    n:"06",    tag:"20+ projects",   title:"No Logo Studio",           cx:964,   cy:1034,   rot:3.25,  w:560, img:"nologo", ratio:"900/667" },
+  { id:"kalda",     n:"02",    tag:"wellbeing",      title:"Kalda App",                cx:1359,  cy:-400,  rot:2.75,  w:560, img:"kalda", ratio:"1080/800" },
+  { id:"talentum",  n:"03",    tag:"web3",           title:"Talentum Web3 Platform",   cx:-395,  cy:-1109, rot:-4,   w:560, img:"talentum", ratio:"1080/800" },
+  { id:"tripment",  n:"04",    tag:"healthtech",     title:"Tripment Health",          cx:-1256, cy:330,   rot:1.5,    w:560, img:"tripment", ratio:"1080/800" },
+  { id:"megadisk",  n:"05",    tag:"cloud storage",  title:"MegaDisk App",             cx:-1455, cy:-813,  rot:-2.25, w:560, img:"megadisk", ratio:"1080/800" },
+  { id:"nologo",    n:"06",    tag:"20+ projects",   title:"No Logo Studio",           cx:964,   cy:1034,   rot:3.25,  w:560, img:"nologo", ratio:"1080/800" },
 
-  { id:"primarkt",  n:"06-01", tag:"real estate",    title:"Primarkt Web Platform",    cx:120,   cy:1174,  rot:-3.5,   w:560, parent:"nologo", img:"primarkt", ratio:"900/667" },
-  { id:"stormwall", n:"06-02", tag:"info security",  title:"StormWall Web Dashboard",  cx:1604,  cy:504,   rot:2,    w:560, parent:"nologo", img:"stormwall", ratio:"900/667" },
+  { id:"primarkt",  n:"06-01", tag:"real estate",    title:"Primarkt Web Platform",    cx:120,   cy:1174,  rot:-3.5,   w:560, parent:"nologo", img:"primarkt", ratio:"1080/800" },
+  { id:"stormwall", n:"06-02", tag:"info security",  title:"StormWall Web Dashboard",  cx:1604,  cy:504,   rot:2,    w:560, parent:"nologo", img:"stormwall", ratio:"1080/800" },
 
   { id:"home",      n:"00",    tag:"index",          title:"Anna Sankhip",             cx:-1699, cy:853,   rot:-2.75, w:560, noImage:true },
-  { id:"contact",   n:"10",    tag:"contact",        title:"Get In Touch",             cx:-965,  cy:1190,  rot:4,    w:560, img:"portrait", ratio:"1/1" }
+  { id:"contact",   n:"10",    tag:"contact",        title:"Get In Touch",             cx:-965,  cy:1190,  rot:4,    w:560, img:"portrait", ratio:"1080/1080" }
 ];
 
 const slot = t => `<div class="slot">${t}</div>`;
 const ask  = t => `<p class="note">${t}</p>`;
 
-const COVER_TALENTUM = "assets/talentum.jpg";
-const COVER_NOLOGO = "assets/no-logo-studio.jpg";
-const COVER_STORMWALL = "assets/stormwall.jpg";
-const COVER_PRIMARKT = "assets/primarkt.jpg";
-const COVER_MEGADISK = "assets/megadisk.jpg";
-const COVER_TRIPMENT = "assets/tripment.jpg";
-const COVER_KALDA = "assets/kalda.jpg";
-const COVER_REFERRAL = "assets/referral.jpg";
-const COVER_PORTAL = "assets/merchant-portal.jpg";
-const COVER_AGENT = "assets/agent-app.jpg";
-const COVER_INHOUSE = "assets/inhouse.jpg";
-const COVER_SALMON = "assets/salmon.jpg";
+const COVER_TALENTUM = "assets/talentum.webp";
+const COVER_NOLOGO = "assets/no-logo-studio.webp";
+const COVER_STORMWALL = "assets/stormwall.webp";
+const COVER_PRIMARKT = "assets/primarkt.webp";
+const COVER_MEGADISK = "assets/megadisk.webp";
+const COVER_TRIPMENT = "assets/tripment.webp";
+const COVER_KALDA = "assets/kalda.webp";
+const COVER_REFERRAL = "assets/referral.webp";
+const COVER_PORTAL = "assets/merchant-portal.webp";
+const COVER_AGENT = "assets/agent-app.webp";
+const COVER_INHOUSE = "assets/inhouse.webp";
+const COVER_SALMON = "assets/salmon.webp";
 const IMAGES = {};
 
-const PORTRAIT = "assets/portrait.jpg";
+const PORTRAIT = "assets/portrait.webp";
 
 const childList = pid => `<div class="list">`+CARDS.filter(c=>c.parent===pid).map(c=>
   `<button data-go="${c.id}"><span class="n">${c.n} / ${c.tag}</span><br>`+
   `<span class="t">${c.title}</span></button>`).join("")+`</div>`;
 
-const COVER_DIAG = "assets/tripment-diagnostic-imaging.jpg";
+const COVER_DIAG = "assets/tripment-diagnostic-imaging.webp";
 const scroller = (src,caption) =>
-  `<figure class="scroller"><img src="${src}" alt=""><figcaption>${caption}</figcaption></figure>`;
+  `<figure class="scroller"><img src="${src}" alt="" loading="lazy" decoding="async"><figcaption>${caption}</figcaption></figure>`;
 
-const cover = (src,ratio) => `<figure class="cover" style="aspect-ratio:${ratio}"><img src="${src}" alt=""></figure>`;
+const cover = (src,ratio) => `<figure class="cover" style="aspect-ratio:${ratio}"><img src="${src}" alt="" loading="lazy" decoding="async"></figure>`;
 
 const PAGES = {
   salmon:`
     <h1>Salmon Bank</h1>
     <p class="meta">Senior Product Designer · 2024–2026 · Philippines · <a href="https://salmon.ph">salmon.ph</a></p>
     <p class="lead">Salmon is a digital bank in the Philippines — consumer lending, cards and banking for a market where most people are new to formal credit.</p>
-    ${cover(COVER_SALMON,"900/593")}
+    ${cover(COVER_SALMON,"1080/712")}
     <div class="figures">
       <div class="fig"><b>14</b><span>internal products I worked on</span></div>
       <div class="fig"><b>11</b><span>of them designed 0→1</span></div>
@@ -315,7 +315,7 @@ const PAGES = {
     <h1>Salmon In-house Projects</h1>
     <p class="meta">Salmon Group Ltd · 2024–2026 · Philippines</p>
     <p class="lead">I designed 11 internal products from scratch. Risk operations, merchant onboarding, hiring: the parts a customer never sees and the business can\'t work without.</p>
-    ${cover(COVER_INHOUSE,"900/667")}
+    ${cover(COVER_INHOUSE,"1080/800")}
     <div class="figures">
       <div class="fig"><b>7</b><span>I assembled myself on Retool</span></div>
       <div class="fig"><b>4</b><span>designed in Figma and handed to engineering</span></div>
@@ -339,7 +339,7 @@ const PAGES = {
     <h1>Salmon Agent App</h1>
     <p class="meta">Salmon Group Ltd · 2024–2026 · Philippines</p>
     <p class="lead">The app existed as an MVP before I arrived. It was one of the few channels the bank had into its agents' daily work, and as the business grew it became clear how little was travelling through it.</p>
-    ${cover(COVER_AGENT,"900/667")}
+    ${cover(COVER_AGENT,"1080/800")}
     <h2>Problem</h2>
     <p>Some agents sold nothing at all. Many worked inefficiently, and few of them used the referral program that pairs them with in-store sellers. The agent network team raised it and asked for a way through, and I took it from there.</p>
     <h2>Process</h2>
@@ -361,7 +361,7 @@ const PAGES = {
     <h1>Salmon Merchant Portal</h1>
     <p class="meta">Salmon Group Ltd · 2024–2026 · Philippines</p>
     <p class="lead">The Merchant Portal is where a Salmon partner sees their own sales and reconciles them. Getting in starts with onboarding, and that is what Self-Service does: an online flow where a merchant uploads the documents Salmon needs. Self-Service is the way into the portal, which makes the two one product.</p>
-    ${cover(COVER_PORTAL,"900/667")}
+    ${cover(COVER_PORTAL,"1080/800")}
     <h2>Problem</h2>
     <p>Before Self-Service, an agent collected every document by hand. That stage took 7 days on average and was the single largest block inside the 23 days between first contact and an approved partner. The internal approval portal had already squeezed the review stages down; document collection was what remained.</p>
     <h2>Process</h2>
@@ -396,7 +396,7 @@ const PAGES = {
     <h1>Salmon Referral Program</h1>
     <p class="meta">Salmon Group Ltd · 2024–2026 · Philippines</p>
     <p class="lead">Sellers in partner stores refer their own customers to Salmon credit and earn for it. I owned the design of the product they use, from the raw MVP I inherited to a native web app.</p>
-    ${cover(COVER_REFERRAL,"900/667")}
+    ${cover(COVER_REFERRAL,"1080/800")}
     <h2>What I owned</h2>
     <p>I designed and launched several features from scratch: a leaderboard, nudge mechanics, and the flow for withdrawing what a seller has earned, shaped to fit the payout policies of the companies that employ them. I rebuilt the whole interface on the new design system, added a run of smaller features, and wrote the copy.</p>
     <p>Around that ran a constant loop with the product manager, the developers, a QA engineer and the researchers, and with the sellers themselves in the malls where the programme operates. We tested hypotheses continuously, and some of them died in surveys before they ever reached development. I built concepts for how the product could scale, ran research, and prototyped.</p>
@@ -425,7 +425,7 @@ const PAGES = {
     <h1>Kalda App</h1>
     <p class="meta">Side project · 2025 · UI and UX · United Kingdom · <a href="https://www.kalda.co">kalda.co</a></p>
     <p class="lead">Kalda is a mental health support app for LGBTQ+ people, built by a small startup with values it actually holds to. This was a side project: interface and experience work rather than product ownership.</p>
-    ${cover(COVER_KALDA,"900/667")}
+    ${cover(COVER_KALDA,"1080/800")}
     <h2>Problem</h2>
     <p>The existing interface was very bright, and the colour and contrast choices made parts of it hard to read. In an app people open when they need support, legibility stops being a cosmetic question. The experience had gaps of its own: states and screens that had never been drawn, so the flow came apart wherever the happy path ended.</p>
     <h2>What I did</h2>
@@ -438,7 +438,7 @@ const PAGES = {
     <h1>Talentum Web3 Platform</h1>
     <p class="meta">UX/UI Designer · 2023–2024 · Remote · <a href="https://web.archive.org/web/20260312120140/https://talentum.id/">talentum.id</a> (archived)</p>
     <p class="lead">Talentum connects web3 projects, DAOs and DeFi protocols among them, with the contributors who grow their communities. A project publishes quests and tasks; people complete them and earn tokens, NFTs and other rewards. The project ends up with an active community, the contributor gets paid for building it.</p>
-    ${cover(COVER_TALENTUM,"900/667")}
+    ${cover(COVER_TALENTUM,"1080/800")}
     <div class="figures">
       <div class="fig"><b>5</b><span>roles, each with its own permissions, settings and interface</span></div>
       <div class="fig"><b>8</b><span>colour schemes, every component tokenised in Figma</span></div>
@@ -464,7 +464,7 @@ const PAGES = {
     <h1>Tripment Health</h1>
     <p class="meta">UX/UI Designer · 2021–2022 · United States (remote) · <a href="https://web.archive.org/web/20220308142111/https://tripment.com/#mental-health">tripment.com</a> (archived)</p>
     <p class="lead">A nationwide healthcare marketplace for people paying out of pocket or carrying a high deductible. Telehealth and in-person visits, diagnostic imaging, lab tests, discounted prescriptions, each with a price attached before you book.</p>
-    ${cover(COVER_TRIPMENT,"900/667")}
+    ${cover(COVER_TRIPMENT,"1080/800")}
     <h2>Problem</h2>
     <p>In the US the price of care is rarely the price you pay. Fees surface at the end, insurance covers less than expected, and people finish treatment having spent their savings or taken on debt. For many of them medicine stops feeling like something they can afford at all.</p>
     <p>Tripment works against that: it partners with clinics and doctors, fixes a clear price per service, and helps people find affordable care near them, insured or not. My job was to make that promise legible on screen.</p>
@@ -488,7 +488,7 @@ const PAGES = {
     <h1>MegaDisk App</h1>
     <p class="meta">Product Designer · MegaFon · 2020–2021 · Russia · Discontinued</p>
     <p class="lead">MegaFon's free cloud storage: a web service and two mobile apps with 1M users between them. I was the only designer on it.</p>
-    ${cover(COVER_MEGADISK,"900/667")}
+    ${cover(COVER_MEGADISK,"1080/800")}
     <h2>Problem</h2>
     <p>The product gave a great deal away. A year of large free storage, extra terms for MegaFon subscribers, paid packages on top. It still sat on low store ratings behind a wall of bad reviews, and the paid packages barely sold. The owners wanted the ratings up, people staying longer in the app, and eventually a product that paid for itself.</p>
     <p>The interface was part of the reason. Similar components behaved differently from one screen to the next, the design had drifted out of consistency, and nothing told a user what the app was doing: no sign that a file was downloading, that a photo was going to the bin, that anything had finished at all.</p>
@@ -513,7 +513,7 @@ const PAGES = {
     <h1>No Logo Studio</h1>
     <p class="meta">Lead User Interface Designer · 2017–2020 · Russia</p>
     <p class="lead">A design agency. I led UI across client work, ran the design process for the team, and sat with the clients myself.</p>
-    ${cover(COVER_NOLOGO,"900/667")}
+    ${cover(COVER_NOLOGO,"1080/800")}
     <div class="figures">
       <div class="fig"><b>20+</b><span>client websites designed and shipped</span></div>
       <div class="fig"><b>1</b><span>mobile app</span></div>
@@ -531,7 +531,7 @@ const PAGES = {
     <h1>StormWall Web Dashboard</h1>
     <p class="meta">UX/UI Designer · 2018–2019 · Russia · within No Logo Studio · <a href="https://stormwall.network">stormwall.network</a></p>
     <p class="lead">The client dashboard for a professional DDoS protection service. Desktop web, designed from the prototype up.</p>
-    ${cover(COVER_STORMWALL,"900/667")}
+    ${cover(COVER_STORMWALL,"1080/800")}
     <h2>Problem</h2>
     <p>The people who use a service like this are watching traffic they cannot afford to lose, and they need to read an attack, adjust protection and manage their services without stopping to think about the interface. The subject was entirely new to me, which made the first problem mine: understanding what the product actually does before designing anything for it.</p>
     <h2>Process</h2>
@@ -547,7 +547,7 @@ const PAGES = {
     <h1>Primarkt Web Platform</h1>
     <p class="meta">Lead Designer · 2019–2020 · Russia · within No Logo Studio · <a href="https://primarkt.ru">primarkt.ru</a></p>
     <p class="lead">A property portal for Kaliningrad: buying, selling, renting. The public side is a listings board. Behind it sits a working tool for the people who deal in property daily, realtors, developers and appraisers, built to grow into a CRM.</p>
-    ${cover(COVER_PRIMARKT,"900/667")}
+    ${cover(COVER_PRIMARKT,"1080/800")}
     <h2>Problem</h2>
     <p>I came in to redesign the part of the portal that already existed and to design the mobile version, while a new development team refactored the code underneath.</p>
     <p>What I found was larger than a redesign. The flow through the professional cabinet had never been worked out at prototype stage and had gone into production with its mistakes intact. People walked into dead ends, lost the thread and left the site.</p>
@@ -563,7 +563,7 @@ const PAGES = {
 
   contact:`
     <h1>Get In Touch</h1>
-    <figure class="portrait"><img src="${PORTRAIT}" alt="Anna Sankhip"></figure>
+    <figure class="portrait"><img src="${PORTRAIT}" alt="Anna Sankhip" loading="lazy" decoding="async"></figure>
     <p class="lead">Open to Senior, Lead, or Staff Product Designer roles — fully remote anywhere, or relocation. Full-time or contract.</p>
     <h2>Reach me</h2>
     <ul>
@@ -612,7 +612,7 @@ CARDS.forEach(c=>{
   if(c.variant) b.dataset.variant=c.variant;
   b.style.width=c.w+"px";
   const media = c.noImage ? "" :
-    c.img ? `<span class="img" style="aspect-ratio:${c.ratio};height:auto"><img src="${IMAGES[c.img]}" alt="" draggable="false"></span>`
+    c.img ? `<span class="img" style="aspect-ratio:${c.ratio};height:auto"><img src="${IMAGES[c.img]}" alt="" draggable="false" loading="lazy" decoding="async"></span>`
           : `<span class="img"></span>`;
   b.innerHTML=`<span class="row"><span class="tag">${c.tag}</span><span>${c.n}</span></span>`+
               `<span class="title">${c.title}</span>`+media;
