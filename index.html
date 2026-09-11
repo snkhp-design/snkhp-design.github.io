@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anna Sankhip — Senior Product Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E5E3DE;      /* content panel + cards */
+  --stage:#333331;      /* map background */
+  --ink:#1B1C16;
+  --ink-80:rgba(27,28,22,.8);
+  --ink-24:rgba(27,28,22,.24);
+  --accent:#A31170;     /* secondary — hover only */
+  --edge:#B4B3AE;       /* every 1px line in the content panel */
+  --slot:#B7B2A4;       /* image placeholder */
+  --slot-alt:#CECAC0;
+  --field:#55524A;      /* generative field strokes */
+  --field-hi:#E5E3DE;
+  --display:"Bebas Neue","Oswald",Impact,sans-serif;
+  --mono:"Fira Mono",ui-monospace,"SF Mono",Menlo,monospace;
+}
+[data-theme="dark"]{
+  --paper:#22201B;
+  --stage:#0B0B09;
+  --ink:#E8E9E2;
+  --ink-80:rgba(232,233,226,.8);
+  --ink-24:rgba(232,233,226,.24);
+  --accent:#E0179A;
+  --edge:#514F4B;
+  --slot:#3A362E;
+  --slot-alt:#443F35;
+  --field:#4A473F;
+  --field-hi:#E8E9E2;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;background:var(--stage);color:var(--ink);
+  font-family:var(--mono);font-size:14px;line-height:20px;
+  -webkit-font-smoothing:antialiased;overflow:hidden;
+  transition:background .3s ease,color .3s ease;
+}
+button{font:inherit;color:inherit;background:none;border:none;padding:0;cursor:pointer}
+a{color:inherit;text-decoration:none;font-weight:500;transition:color .15s ease}
+a:hover{color:var(--accent)}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+
+.app{display:flex;flex-direction:row-reverse;align-items:stretch;height:100vh;height:100dvh}
+
+/* ── content panel (left) ───────────────────── */
+.content{
+  width:600px;max-width:44vw;flex:none;background:var(--paper);
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:40px;overflow:hidden;transition:background .3s ease;
+}
+.nav{display:flex;align-items:center;justify-content:space-between;flex:none;
+  padding-bottom:16px;border-bottom:1px solid transparent;transition:border-color .2s ease}
+.nav.edge{border-bottom-color:var(--edge)}
+.nav-links{display:flex;gap:24px;align-items:center;position:relative}
+.nav-links button{
+  font-weight:500;line-height:16px;padding:4px 0;color:var(--ink);
+  transition:color .15s ease;
+}
+.nav-links button:hover{color:var(--accent)}
+.nav-ink{
+  position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--ink-80);
+  pointer-events:none;opacity:0;
+  transition:left .38s cubic-bezier(.22,.61,.36,1),width .38s cubic-bezier(.22,.61,.36,1),
+             background-color .15s ease,opacity .15s ease;
+}
+.mode{width:24px;height:24px;display:flex;align-items:center;justify-content:center;
+  color:var(--ink);transition:color .15s ease}
+.mode:hover{color:var(--accent)}
+.mode svg{width:24px;height:24px;display:block}
+
+.stage{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;
+  padding:48px 36px 48px 0;margin-right:-36px;
+  scrollbar-width:thin;scrollbar-color:var(--ink-24) transparent}
+.stage::-webkit-scrollbar{width:8px}
+.stage::-webkit-scrollbar-track{background:transparent}
+.stage::-webkit-scrollbar-thumb{background:var(--ink-24);border-radius:4px}
+.stage::-webkit-scrollbar-thumb:hover{background:var(--ink-80)}
+.stage.scrollable{justify-content:flex-start;overflow-y:auto;overscroll-behavior:contain}
+
+.eyebrow{color:var(--ink-80);margin:0 0 24px;text-transform:lowercase}
+.display{
+  font-family:var(--display);font-weight:400;text-transform:uppercase;
+  color:var(--ink);letter-spacing:.04em;line-height:.875;margin:0;
+}
+.home .display{font-size:clamp(56px,7.2vw,128px)}
+.intro{color:var(--ink-80);margin:24px 0 0}
+
+.foot{display:flex;align-items:center;justify-content:space-between;flex:none;
+  padding-top:16px;border-top:1px solid transparent;transition:border-color .2s ease}
+.foot.edge{border-top-color:var(--edge)}
+.foot span{color:var(--ink-80)}
+.btn{
+  border:1px solid var(--ink-80);border-radius:8px;padding:12px;
+  font-weight:500;line-height:16px;display:inline-flex;align-items:center;gap:8px;
+}
+.btn:hover{background:var(--accent);color:#E5E3DE;border-color:var(--accent)}
+
+/* ── article typography ─────────────────────── */
+article h1{font-family:var(--display);font-weight:400;text-transform:uppercase;letter-spacing:.04em;line-height:.9;font-size:clamp(38px,4.4vw,64px);margin:0 0 40px}
+article h2{font-family:var(--display);font-weight:400;text-transform:uppercase;letter-spacing:.04em;font-size:24px;line-height:24px;margin:64px 0 20px}
+article p{margin:0 0 24px;color:var(--ink-80)}
+article .lead{color:var(--ink)}
+article ul{margin:0 0 24px;padding:0;list-style:none}
+article li{position:relative;padding-left:18px;margin-bottom:8px;color:var(--ink-80)}
+article li::before{content:"—";position:absolute;left:0}
+article .note{color:var(--ink-80);border-left:1px solid var(--edge);padding-left:12px}
+.pageno{font-size:12px;color:var(--ink-80);margin:0 0 12px}
+.meta{font-size:12px;color:var(--ink-80);margin:0 0 40px;text-transform:lowercase}
+.figures{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--edge);border:1px solid var(--edge);margin:32px 0}
+.fig{background:var(--paper);padding:14px}
+.figures .fig:last-child:nth-child(odd){grid-column:1 / -1}
+.fig b{display:block;font-family:var(--display);font-weight:400;font-size:44px;line-height:1;letter-spacing:.04em}
+.fig span{display:block;font-size:14px;color:var(--ink-80);margin-top:8px;line-height:20px}
+.cover{margin:0 0 40px;overflow:hidden;border-radius:8px}
+.scroller{margin:32px 0;height:360px;overflow:hidden;border-radius:8px;background:var(--slot);position:relative}
+.scroller img{width:100%;display:block;animation:pageScroll 51s cubic-bezier(.45,0,.55,1) infinite}
+.scroller:hover img{animation-play-state:paused}
+.scroller figcaption{position:absolute;left:10px;bottom:10px;font-size:12px;color:var(--ink-80);
+  background:var(--paper);padding:3px 8px;border-radius:4px}
+@keyframes pageScroll{
+  0%{transform:translateY(0)}
+  66.7%{transform:translateY(calc(360px - 100%))}   /* 34s down */
+  100%{transform:translateY(0)}                     /* 17s back up */
+}
+@media (prefers-reduced-motion:reduce){.scroller img{animation:none}}
+.cover img{width:100%;height:100%;object-fit:cover;display:block}
+.portrait{margin:0 0 40px;max-width:320px}
+.pull{font-family:var(--display);font-weight:400;text-transform:uppercase;letter-spacing:.04em;
+  font-size:clamp(22px,2.5vw,30px);line-height:1.06;color:var(--ink);
+  margin:72px 0 0;padding-left:20px;border-left:2px solid var(--ink)}
+.portrait img{width:100%;height:auto;display:block;border-radius:8px}
+.slot{background:var(--slot);aspect-ratio:16/10;margin:32px 0;border-radius:8px;display:flex;align-items:flex-end;padding:10px;font-size:12px;color:var(--ink-80)}
+.jump{display:flex;flex-wrap:wrap;gap:8px;margin-top:32px}
+.jump button{border:1px solid var(--edge);border-radius:8px;padding:8px 10px;font-size:12px;line-height:16px}
+.jump button:hover{border-color:var(--ink)}
+.list button{display:block;width:100%;text-align:left;padding:16px 0;border-bottom:1px solid var(--edge)}
+.list button:last-child{border-bottom:none}
+.railed{display:flex;align-items:flex-start;margin:64px 0 0}
+.rail-label{font-size:12px;line-height:20px;color:var(--ink-80);white-space:nowrap;
+  writing-mode:vertical-rl;transform:rotate(180deg);margin-right:8px;flex:none}
+.railed .list{flex:1;min-width:0;border-left:1px solid var(--edge);padding-left:16px}
+.list .n{font-size:12px;color:var(--ink-80);transition:color .15s ease}
+.list .t{font-family:var(--display);font-size:24px;line-height:24px;letter-spacing:.04em;text-transform:uppercase;transition:color .15s ease}
+.list button:hover .t,
+.list button:hover .n{color:var(--accent)}
+.list .sub{padding-left:24px}
+
+/* ── map (right) ────────────────────────────── */
+.map{flex:1;min-width:0;position:relative;overflow:hidden;touch-action:none;cursor:grab;
+  background:var(--stage);transition:background .3s ease;user-select:none;-webkit-user-select:none}
+.map img{-webkit-user-drag:none;user-drag:none;pointer-events:none}
+.map.dragging{cursor:grabbing}
+.map::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px 180px;opacity:.07}
+#field{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1}
+#world{position:absolute;top:0;left:0;transform-origin:0 0;will-change:transform;z-index:2}
+
+.card{
+  position:absolute;display:flex;flex-direction:column;gap:8px;align-items:flex-start;
+  background:var(--paper);border-radius:8px;padding:16px;overflow:hidden;text-align:left;
+  touch-action:none;will-change:transform;
+  transition:transform .55s cubic-bezier(.22,.61,.36,1),box-shadow .2s ease,background .3s ease;
+}
+.card:hover{box-shadow:0 0 0 1px var(--ink-24)}
+.card .row{display:flex;justify-content:space-between;width:100%;font-size:20px;line-height:normal;color:var(--ink-80);white-space:nowrap;gap:12px}
+.card .row .tag{overflow:hidden;text-overflow:ellipsis}
+.card .title{font-family:var(--display);font-weight:400;font-size:40px;line-height:40px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);width:100%}
+.card .img{background:var(--slot);height:334px;width:100%;overflow:hidden;border-radius:2px}
+.card .img img{width:100%;height:100%;object-fit:cover;object-position:50% 22%;display:block}
+.card .img[style] img{object-position:50% 50%}
+.card[data-variant="alt"] .img{background:var(--slot-alt)}
+
+.reset{position:absolute;left:40px;bottom:40px;z-index:5;width:24px;height:24px;
+  display:flex;align-items:center;justify-content:center;color:#E8E9E2;
+  transition:opacity .15s ease}
+.reset:hover{opacity:.6}
+.reset svg{width:24px;height:24px;display:block}
+
+@media (max-width:900px){
+  body{overflow:auto}
+  .app{display:block;height:auto}
+  .content{width:100%;max-width:none;padding:24px;height:auto}
+  .nav{position:sticky;top:0;z-index:30;background:var(--paper);padding-top:24px;margin-top:-24px}
+  .stage{padding:32px 0;margin-right:0}
+  .map{height:60vh}
+  .reset{left:24px;bottom:24px}
+  }
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <aside class="content">
+    <div class="nav">
+      <div class="nav-links">
+        <button data-nav="home">home</button>
+        <button data-nav="portfolio">portfolio</button>
+        <button data-nav="contact">contact</button>
+        <span class="nav-ink" id="nav-ink"></span>
+      </div>
+      <button class="mode" id="mode" aria-label="Switch theme"></button>
+    </div>
+    <div class="stage" id="stage"></div>
+    <div class="foot">
+      <span>2026</span>
+      <a class="btn" id="cv" href="assets/Anna_Sankhip_CV_2026_web.pdf" download="Anna Sankhip — CV.pdf">download cv</a>
+    </div>
+  </aside>
+
+  <div class="map" id="map">
+    <canvas id="field"></canvas>
+    <div id="world"></div>
+    <button class="reset" id="z-fit" aria-label="Reset the map"></button>
+  </div>
+</div>
+
+<script>
+/* ───────────────────────────────────────────────
+   Icons — exported from Figma (Mode_Light, Mode_Dark).
+   Fill bound to currentColor so they follow the theme.
+   ─────────────────────────────────────────────── */
+const ICON_RESET = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M2.25 12C2.25 6.61521 6.61521 2.25 12 2.25C16.0411 2.25 19.5067 4.70822 20.9854 8.20801C21.1465 8.58951 20.9674 9.02919 20.5859 9.19043C20.2044 9.35161 19.7648 9.17342 19.6035 8.79199C18.3512 5.82789 15.4172 3.75 12 3.75C7.44364 3.75 3.75 7.44364 3.75 12C3.75 16.5564 7.44364 20.25 12 20.25C15.5909 20.25 18.6473 17.9552 19.7803 14.75C19.9183 14.3595 20.3477 14.1549 20.7383 14.293C21.1285 14.4312 21.3333 14.8596 21.1953 15.25C19.8572 19.0359 16.2464 21.75 12 21.75C6.61521 21.75 2.25 17.3848 2.25 12Z" fill="currentColor"/> <path d="M20.25 6V3C20.25 2.58579 20.5858 2.25 21 2.25C21.4142 2.25 21.75 2.58579 21.75 3V6C21.75 6.6859 21.7517 7.27603 21.6885 7.74609C21.6224 8.23765 21.473 8.70863 21.0908 9.09082C20.7086 9.47301 20.2376 9.62236 19.7461 9.68848C19.276 9.75167 18.6859 9.75 18 9.75H15C14.5858 9.75 14.25 9.41421 14.25 9C14.25 8.58579 14.5858 8.25 15 8.25H18C18.7282 8.25 19.199 8.24877 19.5459 8.20215C19.8712 8.15841 19.9732 8.08737 20.0303 8.03027C20.0874 7.97318 20.1584 7.8712 20.2021 7.5459C20.2488 7.19903 20.25 6.72822 20.25 6Z" fill="currentColor"/> </svg>`;
+const ICON_LIGHT = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M8.30804 18.412C7.75304 18.381 7.22604 18.341 6.74204 18.292C5.99404 18.217 5.32504 18.119 4.80204 17.992C4.54204 17.928 4.29504 17.853 4.08504 17.758C3.89604 17.674 3.63504 17.531 3.46104 17.282C3.27704 17.019 3.24104 16.729 3.25204 16.501C3.26204 16.274 3.32104 16.053 3.39104 15.859C3.53204 15.469 3.76604 15.059 4.00804 14.693C4.25504 14.319 4.53204 13.959 4.78304 13.664C5.02204 13.382 5.27404 13.117 5.46904 12.967C6.05104 12.521 6.78404 12.306 7.86004 11.989L7.99804 11.948C8.27704 11.866 8.56304 11.772 8.86604 11.672L8.89604 11.662C9.20704 11.56 9.53404 11.452 9.86604 11.355C10.304 11.228 10.769 11.114 11.25 11.051V2.75C11.25 2.336 11.586 2 12 2C12.414 2 12.75 2.336 12.75 2.75V11.051C13.231 11.114 13.696 11.228 14.134 11.355C14.466 11.452 14.793 11.56 15.104 11.662L15.134 11.672C15.437 11.772 15.723 11.866 16.002 11.948L16.14 11.989C17.216 12.306 17.949 12.521 18.531 12.967C18.726 13.117 18.978 13.382 19.217 13.664C19.468 13.959 19.745 14.319 19.992 14.693C20.234 15.059 20.468 15.469 20.608 15.859C20.679 16.053 20.738 16.274 20.748 16.501C20.759 16.729 20.723 17.019 20.539 17.282C20.362 17.534 20.092 17.668 19.92 17.741C19.718 17.827 19.479 17.897 19.226 17.956C18.717 18.076 18.06 18.172 17.32 18.25C16.821 18.302 16.274 18.346 15.697 18.382C15.396 20.152 13.856 21.5 12 21.5C10.155 21.5 8.62104 20.167 8.30804 18.412ZM8.42204 13.387C7.15404 13.761 6.71404 13.903 6.38204 14.158C6.32104 14.205 6.15504 14.366 5.92604 14.635C5.70904 14.89 5.46904 15.203 5.26004 15.52C5.04604 15.843 4.88504 16.14 4.80204 16.368C4.79504 16.388 4.78904 16.407 4.78304 16.424C4.87504 16.458 4.99804 16.496 5.15704 16.534C5.58204 16.638 6.17304 16.728 6.89204 16.8C8.32304 16.943 10.175 17.008 12.036 16.999C13.896 16.99 15.743 16.906 17.164 16.758C17.878 16.683 18.464 16.594 18.883 16.496C19.018 16.464 19.126 16.434 19.211 16.406C19.207 16.394 19.203 16.382 19.198 16.368C19.115 16.14 18.954 15.843 18.74 15.52C18.531 15.203 18.291 14.89 18.074 14.635C17.845 14.366 17.679 14.205 17.618 14.158C17.286 13.903 16.846 13.761 15.578 13.387C15.275 13.298 14.969 13.197 14.673 13.099L14.634 13.086C14.321 12.983 14.018 12.884 13.715 12.795C13.106 12.618 12.539 12.5 12 12.5C11.461 12.5 10.894 12.618 10.285 12.795C9.98204 12.884 9.67904 12.983 9.36604 13.086L9.32704 13.099C9.03104 13.197 8.72504 13.298 8.42204 13.387ZM9.87004 18.476C10.172 19.362 11.011 20 12 20C12.995 20 13.84 19.354 14.136 18.458C13.452 18.482 12.747 18.496 12.043 18.499C11.313 18.503 10.58 18.495 9.87004 18.476ZM19.401 16.327C19.401 16.327 19.399 16.328 19.396 16.33L19.401 16.328V16.327Z" fill="currentColor"/> </svg>`;
+const ICON_DARK  = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M8.30804 13.662C7.75304 13.631 7.22604 13.591 6.74204 13.542C5.99404 13.467 5.32504 13.369 4.80204 13.242C4.54204 13.178 4.29504 13.103 4.08504 13.008C3.89604 12.924 3.63504 12.781 3.46104 12.532C3.27704 12.269 3.24104 11.979 3.25204 11.751C3.26204 11.524 3.32104 11.303 3.39104 11.109C3.53204 10.719 3.76604 10.309 4.00804 9.943C4.25504 9.569 4.53204 9.209 4.78304 8.914C5.02204 8.632 5.27404 8.367 5.46904 8.217C6.05104 7.771 6.78404 7.556 7.86004 7.239L7.99804 7.198C8.27704 7.116 8.56304 7.022 8.86604 6.922L8.89604 6.912C9.20704 6.81 9.53404 6.702 9.86604 6.605C10.304 6.478 10.769 6.364 11.25 6.301V2C11.25 1.586 11.586 1.25 12 1.25C12.414 1.25 12.75 1.586 12.75 2V6.301C13.231 6.364 13.696 6.478 14.134 6.605C14.466 6.702 14.793 6.81 15.104 6.912L15.134 6.922C15.437 7.022 15.723 7.116 16.002 7.198L16.14 7.239C17.216 7.556 17.949 7.771 18.531 8.217C18.726 8.367 18.978 8.632 19.217 8.914C19.468 9.209 19.745 9.569 19.992 9.943C20.234 10.309 20.468 10.719 20.608 11.109C20.679 11.303 20.738 11.524 20.748 11.751C20.759 11.979 20.723 12.269 20.539 12.532C20.362 12.784 20.092 12.918 19.92 12.991C19.718 13.077 19.479 13.147 19.226 13.206C18.717 13.326 18.06 13.422 17.32 13.5C16.821 13.552 16.274 13.596 15.697 13.632C15.396 15.402 13.856 16.75 12 16.75C10.155 16.75 8.62104 15.417 8.30804 13.662ZM8.42204 8.637C7.15404 9.011 6.71404 9.153 6.38204 9.408C6.32104 9.455 6.15504 9.616 5.92604 9.885C5.70904 10.14 5.46904 10.453 5.26004 10.77C5.04604 11.093 4.88504 11.39 4.80204 11.618C4.79504 11.638 4.78904 11.657 4.78304 11.674C4.87504 11.708 4.99804 11.746 5.15704 11.784C5.58204 11.888 6.17304 11.978 6.89204 12.05C8.32304 12.193 10.175 12.258 12.036 12.249C13.896 12.24 15.743 12.156 17.164 12.008C17.878 11.933 18.464 11.844 18.883 11.746C19.018 11.714 19.126 11.684 19.211 11.656C19.207 11.644 19.203 11.632 19.198 11.618C19.115 11.39 18.954 11.093 18.74 10.77C18.531 10.453 18.291 10.14 18.074 9.885C17.845 9.616 17.679 9.455 17.618 9.408C17.286 9.153 16.846 9.011 15.578 8.637C15.275 8.548 14.969 8.447 14.673 8.349L14.634 8.336C14.321 8.233 14.018 8.134 13.715 8.045C13.106 7.868 12.539 7.75 12 7.75C11.461 7.75 10.894 7.868 10.285 8.045C9.98204 8.134 9.67904 8.233 9.36604 8.336L9.32704 8.349C9.03104 8.447 8.72504 8.548 8.42204 8.637ZM9.60004 18.55C9.84804 18.881 9.78104 19.351 9.45004 19.6L7.45004 21.1C7.11904 21.349 6.64804 21.281 6.40004 20.95C6.15104 20.619 6.21904 20.149 6.55004 19.9L8.55004 18.4C8.88104 18.152 9.35104 18.219 9.60004 18.55ZM14.4 18.55C14.648 18.219 15.118 18.152 15.45 18.4L17.45 19.9C17.781 20.148 17.848 20.618 17.6 20.95C17.351 21.281 16.881 21.348 16.55 21.1L14.55 19.6C14.219 19.351 14.151 18.881 14.4 18.55ZM12 19.25C12.414 19.25 12.75 19.586 12.75 20V22C12.75 22.414 12.414 22.75 12 22.75C11.586 22.75 11.25 22.414 11.25 22V20C11.25 19.586 11.586 19.25 12 19.25ZM19.401 11.577C19.401 11.577 19.399 11.578 19.396 11.58L19.401 11.578V11.577Z" fill="currentColor"/> </svg>`;
+
+/* ───────────────────────────────────────────────
+   CARDS — numbering and titles exactly as set in
+   Figma. Tags reworked for consistency.
+   ─────────────────────────────────────────────── */
+/* cx / cy: world coordinates of each card's centre, 01 sits at the origin.
+   Positions traced from Anna's own arrangement. rot = tilt in degrees. */
+const CARDS = [
+  { id:"salmon",    n:"01",    tag:"fintech",        title:"Salmon Bank",              cx:0,     cy:0,     rot:-1.25, w:560, img:"salmon", ratio:"900/593" },
+
+  { id:"inhouse",   n:"01-01", tag:"fintech",        title:"Salmon In-house Projects", cx:345,   cy:-556,  rot:2.25,  w:560, parent:"salmon", img:"inhouse", ratio:"900/667" },
+  { id:"agent",     n:"01-02", tag:"fintech",        title:"Salmon Agent App",         cx:654,   cy:323,   rot:-3,   w:560, parent:"salmon", img:"agent", ratio:"900/667" },
+  { id:"portal",    n:"01-03", tag:"fintech",        title:"Salmon Merchant Portal",   cx:-255,  cy:620,   rot:3.75,  w:560, parent:"salmon", img:"portal", ratio:"900/667" },
+  { id:"referral",  n:"01-04", tag:"fintech",        title:"Salmon Referral Program",  cx:-675,  cy:-397,  rot:-1.75, w:560, parent:"salmon", img:"referral", ratio:"900/667" },
+
+  { id:"kalda",     n:"02",    tag:"wellbeing",      title:"Kalda App",                cx:1359,  cy:-400,  rot:2.75,  w:560, img:"kalda", ratio:"900/667" },
+  { id:"talentum",  n:"03",    tag:"web3",           title:"Talentum Web3 Platform",   cx:-395,  cy:-1109, rot:-4,   w:560, img:"talentum", ratio:"900/667" },
+  { id:"tripment",  n:"04",    tag:"healthtech",     title:"Tripment Health",          cx:-1256, cy:330,   rot:1.5,    w:560, img:"tripment", ratio:"900/667" },
+  { id:"megadisk",  n:"05",    tag:"cloud storage",  title:"MegaDisk App",             cx:-1455, cy:-813,  rot:-2.25, w:560, img:"megadisk", ratio:"900/667" },
+  { id:"nologo",    n:"06",    tag:"20+ projects",   title:"No Logo Studio",           cx:964,   cy:1034,   rot:3.25,  w:560, img:"nologo", ratio:"900/667" },
+
+  { id:"primarkt",  n:"06-01", tag:"real estate",    title:"Primarkt Web Platform",    cx:120,   cy:1174,  rot:-3.5,   w:560, parent:"nologo", img:"primarkt", ratio:"900/667" },
+  { id:"stormwall", n:"06-02", tag:"info security",  title:"StormWall Web Dashboard",  cx:1604,  cy:504,   rot:2,    w:560, parent:"nologo", img:"stormwall", ratio:"900/667" },
+
+  { id:"home",      n:"00",    tag:"index",          title:"Anna Sankhip",             cx:-1699, cy:853,   rot:-2.75, w:560, noImage:true },
+  { id:"contact",   n:"10",    tag:"contact",        title:"Get In Touch",             cx:-965,  cy:1190,  rot:4,    w:560, img:"portrait", ratio:"1/1" }
+];
+
+const slot = t => `<div class="slot">${t}</div>`;
+const ask  = t => `<p class="note">${t}</p>`;
+
+const COVER_TALENTUM = "assets/talentum.jpg";
+const COVER_NOLOGO = "assets/no-logo-studio.jpg";
+const COVER_STORMWALL = "assets/stormwall.jpg";
+const COVER_PRIMARKT = "assets/primarkt.jpg";
+const COVER_MEGADISK = "assets/megadisk.jpg";
+const COVER_TRIPMENT = "assets/tripment.jpg";
+const COVER_KALDA = "assets/kalda.jpg";
+const COVER_REFERRAL = "assets/referral.jpg";
+const COVER_PORTAL = "assets/merchant-portal.jpg";
+const COVER_AGENT = "assets/agent-app.jpg";
+const COVER_INHOUSE = "assets/inhouse.jpg";
+const COVER_SALMON = "assets/salmon.jpg";
+const IMAGES = {};
+
+const PORTRAIT = "assets/portrait.jpg";
+
+const childList = pid => `<div class="list">`+CARDS.filter(c=>c.parent===pid).map(c=>
+  `<button data-go="${c.id}"><span class="n">${c.n} / ${c.tag}</span><br>`+
+  `<span class="t">${c.title}</span></button>`).join("")+`</div>`;
+
+const COVER_DIAG = "assets/tripment-diagnostic-imaging.jpg";
+const scroller = (src,caption) =>
+  `<figure class="scroller"><img src="${src}" alt=""><figcaption>${caption}</figcaption></figure>`;
+
+const cover = (src,ratio) => `<figure class="cover" style="aspect-ratio:${ratio}"><img src="${src}" alt=""></figure>`;
+
+const PAGES = {
+  salmon:`
+    <h1>Salmon Bank</h1>
+    <p class="meta">Senior Product Designer · 2024–2026 · Philippines · <a href="https://salmon.ph">salmon.ph</a></p>
+    <p class="lead">Salmon is a digital bank in the Philippines — consumer lending, cards and banking for a market where most people are new to formal credit.</p>
+    ${cover(COVER_SALMON,"900/593")}
+    <div class="figures">
+      <div class="fig"><b>14</b><span>internal products I worked on</span></div>
+      <div class="fig"><b>11</b><span>of them designed 0→1</span></div>
+      <div class="fig"><b>1</b><span>recurring design meetup I started</span></div>
+      <div class="fig"><b>1</b><span>conference talk, Salmon Manila Boost</span></div>
+    </div>
+    <h2>How it went</h2>
+    <p>I joined a team of 3 staff designers.</p>
+    <p>At first I built internal tools from scratch on low-code, Retool and Appsmith: a tool for the antifraud team, a tool for tracking how Salmon agents were performing, 7 that I assembled myself. They replaced Google Sheets and the manual processing of new partner document packets, and the teams inside the bank got faster.</p>
+    <p>Alongside that I fixed design problems in marketing materials and on the public web, and reviewed the work of outstaff designers, building guidelines as I went.</p>
+    <p>Later I moved to owning the design of internal products end to end. Three of them already existed as MVPs when I arrived, and I took over improving them: the referral portal, the merchant portal and the agent app. Each has its own page below.</p>
+    <p>On the referral program I became a full member of a new product team, ran field research, tested hypotheses, and prototyped user scenarios.</p>
+    <h2>Design Shots</h2>
+    <p>The design team grew more than 10× while I was there, and formal reviews and design crit sessions weren't enough to keep everyone in sync. So I started Design Shots: designers met regularly and I facilitated a topic each time.</p>
+    <div class="railed"><span class="rail-label">products I owned</span>${childList("salmon")}</div>`,
+
+  inhouse:`
+    <h1>Salmon In-house Projects</h1>
+    <p class="meta">Salmon Group Ltd · 2024–2026 · Philippines</p>
+    <p class="lead">I designed 11 internal products from scratch. Risk operations, merchant onboarding, hiring: the parts a customer never sees and the business can\'t work without.</p>
+    ${cover(COVER_INHOUSE,"900/667")}
+    <div class="figures">
+      <div class="fig"><b>7</b><span>I assembled myself on Retool</span></div>
+      <div class="fig"><b>4</b><span>designed in Figma and handed to engineering</span></div>
+    </div>
+    <h2>Sales Performance Tool</h2>
+    <p>I built the workspace territory and regional sales heads use to watch Salmon agent performance. Warehouse alerts became triggers that keep their own history, then actions someone owns, with a criticality score on top so the worst cases surface first.</p>
+    <h2>Antifraud Tool</h2>
+    <p>Investigators work through cases, welcome calls, fraud flags and a Work-On queue. I designed that workspace and flattened deeply nested records into screens they can scan, so reaching a case stopped meaning digging through layers.</p>
+    <h2>Violation Tool</h2>
+    <p>Violations and terminations close the chain that starts with an alert. I designed the tool that records them, where a case turns into a decision about a Salmon agent's contract.</p>
+    <h2>Sales Network Portal</h2>
+    <p>Partner data used to live in Confluence, approvals moved by email, antifraud tickets were typed in by hand. I led design for merchant onboarding end to end and replaced all of that with one flow, from company profile to the first loan issued in the store: company, store and user origination, KYC and online signing, due diligence, the change history log. I co-authored the functional specs behind it. Monthly company onboardings grew 3.3× after launch, and every new partner now comes through it.</p>
+    <h2>Salmon Agents Hiring</h2>
+    <p>Salmon recruits agents by the hundred every month. I designed the funnel that carries them: the public application page, the recruiting and onboarding forms, the vacancy list with its filters, and the rework of hiring requests. Applications that used to sit in a spreadsheet became structured records feeding the workforce planner.</p>
+    <h2>Across all of them</h2>
+    <p>The same work ran underneath all of them. I organised large volumes of interconnected data into interfaces people can read at a glance, built the navigation through them, and held one design system consistent across every project. I ran design reviews, tested with the people using these tools daily, and kept proposing changes that cut clicks out of back-office routine.</p>
+    <h2>Picking the tool</h2>
+    <p>The Sales Network Portal started on Appsmith. Once the platform's limits began holding the build back, I pushed to move it to Retool and helped argue the case. The switch cost less and shipped faster.</p>`,
+
+  agent:`
+    <h1>Salmon Agent App</h1>
+    <p class="meta">Salmon Group Ltd · 2024–2026 · Philippines</p>
+    <p class="lead">The app existed as an MVP before I arrived. It was one of the few channels the bank had into its agents' daily work, and as the business grew it became clear how little was travelling through it.</p>
+    ${cover(COVER_AGENT,"900/667")}
+    <h2>Problem</h2>
+    <p>Some agents sold nothing at all. Many worked inefficiently, and few of them used the referral program that pairs them with in-store sellers. The agent network team raised it and asked for a way through, and I took it from there.</p>
+    <h2>Process</h2>
+    <p>I went into the field and talked to agents, and to the sellers who recommend Salmon credit to their own customers. Three things came back. An agent had no idea what a single issued loan would earn them, because the app never showed it. Reaching a seller across a large mall was awkward enough that calls went unanswered. And an agent could only learn their own sales figures from their manager, one conversation at a time, out of a spreadsheet they never saw.</p>
+    <h2>Solution</h2>
+    <p>I designed a section that lays the incentive system out in full: how the tiers work, what moving up multiplies, what has already been earned, and how much money to expect at the end of the month. The accrual history replaced the manager's spreadsheet, and sales figures became something an agent could open rather than ask for. I shipped it in stages, motivation first and detailed statistics after, and ran a focus group on the statistics screens before they went out.</p>
+    <p>Alongside it I designed the training section together with the learning team. They wrote the programme, a short course on working with customers and on earning more, and my part was getting it into an interface agents would work through on their own. That took repetitive one-to-one teaching off the territory sales heads, who until then trained every agent personally.</p>
+    <p>I also designed a leaderboard ranking agents by loans issued. Team and competitive dynamics sit close to how people work in the Philippines, and the leaderboard leaned on that rather than on individual targets alone.</p>
+    <h2>Impact</h2>
+    <div class="figures">
+      <div class="fig"><b>100%</b><span>adoption — every agent uses the section</span></div>
+      <div class="fig"><b>4.7×</b><span>fewer questions from agents about their payouts</span></div>
+      <div class="fig"><b>2.5×</b><span>agent activity one month after motivation shipped. Several things moved at once, including operational changes, so the design is one contributor to that number rather than the whole of it</span></div>
+    </div>
+    <p>Activity was measured a month after launch as good loans per agent, meaning loans that carry no risk flags, and the volume behind them. The incentive is calculated from exactly those two numbers, so that is where the section had to show up if it worked.</p>
+    <p>Payouts stopped being a guess. Agents could see what they had already earned and what the next tier was worth, which gave the climb a reason. Some territory heads still keep their own spreadsheets, but the app is what the bank now treats as the source of truth.</p>`,
+
+  portal:`
+    <h1>Salmon Merchant Portal</h1>
+    <p class="meta">Salmon Group Ltd · 2024–2026 · Philippines</p>
+    <p class="lead">The Merchant Portal is where a Salmon partner sees their own sales and reconciles them. Getting in starts with onboarding, and that is what Self-Service does: an online flow where a merchant uploads the documents Salmon needs. Self-Service is the way into the portal, which makes the two one product.</p>
+    ${cover(COVER_PORTAL,"900/667")}
+    <h2>Problem</h2>
+    <p>Before Self-Service, an agent collected every document by hand. That stage took 7 days on average and was the single largest block inside the 23 days between first contact and an approved partner. The internal approval portal had already squeezed the review stages down; document collection was what remained.</p>
+    <h2>Process</h2>
+    <p>I designed Self-Service from scratch with the product manager and stayed alongside the developers through the build rather than handing screens over. Everything went through design review before it reached production.</p>
+    <h2>Solution</h2>
+    <p>A merchant fills in a short form, confirms their phone number with a one-time code, and uploads the documents themselves. Two entrances lead to the same place: the public Salmon page for merchants, or the portal address directly. Returning merchants log in and land on their profile; new ones are checked against the database and routed into the application flow. Once approved, that same account is their way into the portal, where they see and reconcile their sales.</p>
+    <h2>Impact</h2>
+    <div class="figures">
+      <div class="fig"><b>15 min</b><span>to collect documents through the online flow, against 7 days before</span></div>
+      <div class="fig"><b>7 days</b><span>from first contact to an approved partner, against 23 days before</span></div>
+      <div class="fig"><b>80%</b><span>forecast adoption. The remaining 20% are corner cases the flow does not cover</span></div>
+    </div>
+    <p>The internal approval portal had already brought end-to-end onboarding from 23 days to 10. Self-Service closed the document collection stage that made up most of what was left. Offline collection still takes 3 days, because some merchants are not ready to upload documents themselves and a meeting is needed.</p>
+    <p>The time figures come from a test with 50 merchants onboarded in November and December 2025. The full version rolled out later, so there are no numbers yet on how much the merchant base grew because of it.</p>
+    <h2>The approval side of the same chain</h2>
+    <p>Self-Service handles the documents. The Sales Network Portal handles what happens to them inside the bank, and I led design on that too. Before it, back-office review, compliance and antifraud all ran over email, and every additional document request added 2.5 days on average.</p>
+    <ul>
+      <li>Back-office review: 5 days to 2</li>
+      <li>Compliance review: 3 days to 1 minute, through an automatic integration</li>
+      <li>Antifraud review: 7 days to 4</li>
+      <li>Manual activation: 1 day to 1 minute, automatic</li>
+    </ul>
+    <div class="figures">
+      <div class="fig"><b>100%</b><span>adoption — no new partner starts working with Salmon without it</span></div>
+      <div class="fig"><b>3.3×</b><span>companies onboarded per month, 500 against 150 before launch</span></div>
+    </div>
+    <p>Across the same year the partner base grew 4×, with the portal one of the things behind that. KYC and online signing are designed and waiting to be released; the team expects onboarding to fall to 3–5 days once they are.</p>
+    <h2>Moving the portal to native web</h2>
+    <p>The Merchant Portal predates me and ran on a low-code platform. I owned the design side of moving it to native web, and the move was meant to be invisible: the same tables, the same buttons, a component set rebuilt underneath so the product could be developed properly from then on.</p>`,
+
+  referral:`
+    <h1>Salmon Referral Program</h1>
+    <p class="meta">Salmon Group Ltd · 2024–2026 · Philippines</p>
+    <p class="lead">Sellers in partner stores refer their own customers to Salmon credit and earn for it. I owned the design of the product they use, from the raw MVP I inherited to a native web app.</p>
+    ${cover(COVER_REFERRAL,"900/667")}
+    <h2>What I owned</h2>
+    <p>I designed and launched several features from scratch: a leaderboard, nudge mechanics, and the flow for withdrawing what a seller has earned, shaped to fit the payout policies of the companies that employ them. I rebuilt the whole interface on the new design system, added a run of smaller features, and wrote the copy.</p>
+    <p>Around that ran a constant loop with the product manager, the developers, a QA engineer and the researchers, and with the sellers themselves in the malls where the programme operates. We tested hypotheses continuously, and some of them died in surveys before they ever reached development. I built concepts for how the product could scale, ran research, and prototyped.</p>
+    <div class="figures">
+      <div class="fig"><b>30%</b><span>first-week activation, against 13% before clearer reward tracking and a simpler payout flow</span></div>
+    </div>
+    <h2>The hard part: calling an agent</h2>
+    <p>A customer is standing in the shop, ready to buy. To turn that into a credit application, the seller needs a Salmon agent at the counter. So the seller goes looking for one across a mall the size of a small town, does not find them, or waits too long. The customer leaves.</p>
+    <p>The scale showed in the numbers: around 20,000 referrals a week were producing roughly 100 agent calls. The business was losing customers who had already said yes.</p>
+    <h2>Process</h2>
+    <p>I mapped customer journeys for all three sides — the customer, the seller and the agent — and looked for where their paths actually cross rather than where the funnel said they should. Then I built clickable prototypes of a new way through, and together with the product manager we put two versions in front of real users.</p>
+    <h2>Solution</h2>
+    <p>The seller stops hunting for anyone. I designed a landing page where the customer chooses the product themselves and reaches an agent on the spot through telephony. The seller's only job is to show a QR code, generated in the referral portal and printed to sit somewhere visible, or to send the link with their own referral code attached. That second option widened the channel quietly: a referral no longer has to happen inside the shop.</p>
+    <p>Waiting was the other half of the problem. Instead of leaving the customer with nothing to do, the landing page holds their attention while the agent is on the way.</p>
+    <p>The fix reached into the agent app too. I redesigned how requests from new customers arrive there, so an agent sees where to go, how long the customer has already been waiting, and can contact them directly.</p>
+    <h2>Impact</h2>
+    <div class="figures">
+      <div class="fig"><b>308</b><span>people tested on two prototypes before either was built</span></div>
+      <div class="fig"><b>83 vs 51%</b><span>completion — the version we shipped against the alternative</span></div>
+    </div>
+    <p>I left Salmon before the numbers after launch came in, so the honest result here is the test itself rather than a claim about what happened next.</p>
+    <h2>Moving the portal to native web</h2>
+    <p>The referral portal began on Bubble, a low-code platform that capped how far the product could scale. Once the team had grown into a real product team, we moved it to native web. I owned the design side of the move and the adaptation that came with it, and ran the final review. Sellers can now keep the web app on their desktop, and new features ship at the team's pace instead of the platform's.</p>`,
+
+  kalda:`
+    <h1>Kalda App</h1>
+    <p class="meta">Side project · 2025 · UI and UX · United Kingdom · <a href="https://www.kalda.co">kalda.co</a></p>
+    <p class="lead">Kalda is a mental health support app for LGBTQ+ people, built by a small startup with values it actually holds to. This was a side project: interface and experience work rather than product ownership.</p>
+    ${cover(COVER_KALDA,"900/667")}
+    <h2>Problem</h2>
+    <p>The existing interface was very bright, and the colour and contrast choices made parts of it hard to read. In an app people open when they need support, legibility stops being a cosmetic question. The experience had gaps of its own: states and screens that had never been drawn, so the flow came apart wherever the happy path ended.</p>
+    <h2>What I did</h2>
+    <p>I rebuilt the interface as a clean, readable redesign, with accessibility driving the colour and contrast decisions rather than being checked at the end.</p>
+    <p>I filled the gaps in the experience, drawing the missing states and screens and assembling them into a flow that holds together from one end to the other.</p>
+    <p>I wrote the responsive rules for the developer, so the app holds up on tablets and not only on phones.</p>
+`,
+
+  talentum:`
+    <h1>Talentum Web3 Platform</h1>
+    <p class="meta">UX/UI Designer · 2023–2024 · Remote · <a href="https://web.archive.org/web/20260312120140/https://talentum.id/">talentum.id</a> (archived)</p>
+    <p class="lead">Talentum connects web3 projects, DAOs and DeFi protocols among them, with the contributors who grow their communities. A project publishes quests and tasks; people complete them and earn tokens, NFTs and other rewards. The project ends up with an active community, the contributor gets paid for building it.</p>
+    ${cover(COVER_TALENTUM,"900/667")}
+    <div class="figures">
+      <div class="fig"><b>5</b><span>roles, each with its own permissions, settings and interface</span></div>
+      <div class="fig"><b>8</b><span>colour schemes, every component tokenised in Figma</span></div>
+      <div class="fig"><b>60+</b><span>web3 projects running on the platform</span></div>
+      <div class="fig"><b>300K+</b><span>contributors across those projects</span></div>
+    </div>
+    <h2>Problem</h2>
+    <p>Two audiences with opposite needs live on the same platform. A project wants every parameter of a campaign under its own control: who can do what, how rewards are calculated, what the funnel looks like at each step. A contributor wants to open the product and see immediately what to do next and what it pays. Push the configurability into the contributor's view and it becomes unusable. Hide it and the project loses the control it came for.</p>
+    <p>I also arrived without the domain. Understanding what these projects run on, and what the rewards actually are, came before designing anything for them.</p>
+    <h2>Process</h2>
+    <p>I worked through the competing platforms in the space, learned the blockchain mechanics sitting under the reward layer, and spent time on what makes someone keep contributing to a community instead of completing one bounty and disappearing. That last question shaped more of the product than any feature request did.</p>
+    <h2>What I designed</h2>
+    <p><b>Five roles, one system.</b> Platform super-admins, project owners, project admins, project managers and contributors, each with their own permissions, settings and interface. I designed all of them, along with the structure underneath that keeps them recognisable as one product.</p>
+    <p><b>Quests and tasks.</b> The creation flows a project uses to define what contributors do, and the dashboards and tables that show what came of it.</p>
+    <p><b>Rewards, the marketplace and an in-platform wallet,</b> where a contributor tracks what they have earned and spends it.</p>
+    <p><b>Engagement and retention mechanics:</b> leaderboards, streaks, loot boxes and others. For contributors these carry the product. They are the reason someone comes back tomorrow rather than finishing a task and leaving.</p>
+    <p><b>White-labelling.</b> Later the platform let each project wear its own identity. I built around 8 colour schemes and tokenised every component so a theme switches instantly and without anything breaking visually, then handed the token structure to engineering.</p>
+    <p><b>The responsive version.</b> The platform launched desktop-first. I designed the mobile layouts afterwards, so contributors were no longer tied to a desk to do the work.</p>
+    <h2>Where it landed</h2>
+    <p>A platform that multiple web3 projects could run their own communities on, each looking like itself. The project is on pause now, and no performance numbers from this work are mine to publish.</p>`,
+
+  tripment:`
+    <h1>Tripment Health</h1>
+    <p class="meta">UX/UI Designer · 2021–2022 · United States (remote) · <a href="https://web.archive.org/web/20220308142111/https://tripment.com/#mental-health">tripment.com</a> (archived)</p>
+    <p class="lead">A nationwide healthcare marketplace for people paying out of pocket or carrying a high deductible. Telehealth and in-person visits, diagnostic imaging, lab tests, discounted prescriptions, each with a price attached before you book.</p>
+    ${cover(COVER_TRIPMENT,"900/667")}
+    <h2>Problem</h2>
+    <p>In the US the price of care is rarely the price you pay. Fees surface at the end, insurance covers less than expected, and people finish treatment having spent their savings or taken on debt. For many of them medicine stops feeling like something they can afford at all.</p>
+    <p>Tripment works against that: it partners with clinics and doctors, fixes a clear price per service, and helps people find affordable care near them, insured or not. My job was to make that promise legible on screen.</p>
+    <h2>What I designed</h2>
+    <p>The homepage, across every viewport we supported. I opened the service up so that each key section was reachable from the front page, pulled the design back into consistency, reused the components the design system already had, built the ones it lacked, and accounted for every state each of them could be in.</p>
+    <p>Search as a flow, both inside a section and across the whole site. Authorisation and registration: forms and layout rebuilt.</p>
+    <p>Lab tests. I prototyped and redesigned the section around navigation by test type. Finding and ordering the right test got simpler, and fewer people left the section without one.</p>
+    <p>Diagnostic imaging. The task was to make the types of imaging clear to a patient and answer the questions they arrive with, so they could either book at the centre they chose or ask for a preliminary consultation.</p>
+    <p>Medications, which did not exist before. I prototyped and designed a marketplace for drugs where a patient searches by brand name, active substance or price, shaped around the fact that a consultation and a prescription come first. Both of those can also happen inside Tripment.</p>
+    <p>Alongside the product I made landing pages, promo banners and emails for marketing campaigns.</p>
+    ${scroller(COVER_DIAG,"diagnostic imaging — full page")}
+    <h2>Process</h2>
+    <p>Every large task went through several rounds. Ideas passed or were dropped along the way, and the first iteration and the last often had little in common.</p>
+    <h2>Impact</h2>
+    <div class="figures">
+      <div class="fig"><b>2×</b><span>completed paid transactions, within a month of the redesigned medicine-ordering flow shipping</span></div>
+      <div class="fig"><b>3</b><span>designers working faster on a shared, expanded component library</span></div>
+    </div>`,
+
+  megadisk:`
+    <h1>MegaDisk App</h1>
+    <p class="meta">Product Designer · MegaFon · 2020–2021 · Russia · Discontinued</p>
+    <p class="lead">MegaFon's free cloud storage: a web service and two mobile apps with 1M users between them. I was the only designer on it.</p>
+    ${cover(COVER_MEGADISK,"900/667")}
+    <h2>Problem</h2>
+    <p>The product gave a great deal away. A year of large free storage, extra terms for MegaFon subscribers, paid packages on top. It still sat on low store ratings behind a wall of bad reviews, and the paid packages barely sold. The owners wanted the ratings up, people staying longer in the app, and eventually a product that paid for itself.</p>
+    <p>The interface was part of the reason. Similar components behaved differently from one screen to the next, the design had drifted out of consistency, and nothing told a user what the app was doing: no sign that a file was downloading, that a photo was going to the bin, that anything had finished at all.</p>
+    <h2>Process</h2>
+    <p>I went through both apps and the design files I had inherited, wrote every UX weakness into one document, and we turned it into a backlog at a team meetup. The team ran two-week sprints and groomed weekly, so that list stayed alive instead of becoming a plan nobody opened.</p>
+    <h2>What I designed</h2>
+    <p>A light redesign of the main screens that left the architecture alone: grids, rules for colour and typography, one icon style, spacing put in order. I moved the design from Sketch to Figma and built a component library covering light and dark themes on both platforms, then reworked the larger composite components so screens stopped contradicting each other.</p>
+    <p><b>Trash.</b> Deleted files, photos and videos land there first and can be restored or removed for good. I researched it, placed the section inside the app's architecture, and designed deletion, restore and permanent delete.</p>
+    <p><b>Public links,</b> so someone could share an album, a folder or a single file. More constrained than it sounds, and the harder of the two. It shipped.</p>
+    <p><b>Automatic albums.</b> I researched the feature, proposed how it should work, and prototyped three versions. There was one day before the team meetup, so the usability test was small: 9 people, three per prototype. It was enough to choose. I refined the winner and we launched on Android.</p>
+    <p><b>Responsiveness.</b> I audited every process in the app and collected each case that needed visible feedback into a single document, sorted into four kinds: skeletons, a global loader, spinners, progress indicators, each with the situations it belongs to. I showed them as animated components in Figma. The same audit covered completion messages, which the app had none of.</p>
+    <p><b>A mini-app inside MegaFon's super-app,</b> so a subscriber could switch storage on without leaving their account. I gathered the requirements and constraints, built the user flow and designed the section. The difficulty was keeping MegaDisk's own logic intact while assembling everything out of the super-app's components.</p>
+    <p>Alongside those: in-app messages, an unlimited tariff, storage for call recordings, and a rebuilt feedback section.</p>
+    <h2>Impact</h2>
+    <div class="figures">
+      <div class="fig"><b>over 4</b><span>store rating on both Google Play and the App Store, up from under 3</span></div>
+      <div class="fig"><b>1M</b><span>users across three platforms, one designer</span></div>
+    </div>
+    <p>Ratings rose on both stores, and the new features brought people back into the app. Automatic albums most of all.</p>`,
+
+  nologo:`
+    <h1>No Logo Studio</h1>
+    <p class="meta">Lead User Interface Designer · 2017–2020 · Russia</p>
+    <p class="lead">A design agency. I led UI across client work, ran the design process for the team, and sat with the clients myself.</p>
+    ${cover(COVER_NOLOGO,"900/667")}
+    <div class="figures">
+      <div class="fig"><b>20+</b><span>client websites designed and shipped</span></div>
+      <div class="fig"><b>1</b><span>mobile app</span></div>
+    </div>
+    <h2>The work</h2>
+    <p>I designed responsive interfaces and interactive prototypes, working from the analytics account managers brought back from clients. I spent a lot of time with those clients directly, finding out what was actually hurting their business and working out what design could do about it, then presenting and defending the decisions myself.</p>
+    <p>I onboarded and mentored a mid-level designer: planned the workload, handed out the tasks, reviewed the results. I ran design reviews for the team and code reviews for layout fidelity, and took on visual identity work where an engagement called for it.</p>
+    <h2>Moving the studio to Figma</h2>
+    <p>This was still the Photoshop era. Figma's beta appeared at the end of 2016 and I started working in it straight away, then moved the other designers and each new project across one at a time. I also spoke at local design conferences through these years.</p>
+    <h2>Why I left for product</h2>
+    <p>The studio ran on waterfall. A project was carried through to a finish everyone was satisfied with, and then the next one began. It is a clean way to work and it taught me a great deal, but it meant letting go of a product at its first version. That is what moved me towards product design: I wanted to keep developing something rather than hand it over and start again.</p>
+    <div class="railed"><span class="rail-label">selected projects</span>${childList("nologo")}</div>`,
+
+  stormwall:`
+    <h1>StormWall Web Dashboard</h1>
+    <p class="meta">UX/UI Designer · 2018–2019 · Russia · within No Logo Studio · <a href="https://stormwall.network">stormwall.network</a></p>
+    <p class="lead">The client dashboard for a professional DDoS protection service. Desktop web, designed from the prototype up.</p>
+    ${cover(COVER_STORMWALL,"900/667")}
+    <h2>Problem</h2>
+    <p>The people who use a service like this are watching traffic they cannot afford to lose, and they need to read an attack, adjust protection and manage their services without stopping to think about the interface. The subject was entirely new to me, which made the first problem mine: understanding what the product actually does before designing anything for it.</p>
+    <h2>Process</h2>
+    <p>I worked through a large volume of technical material, went over comparable services, and interviewed the founder and the company's engineers to build a picture of what their customers are dealing with.</p>
+    <p>To keep the budget where it mattered, we agreed to prototype without detail, enough to settle the architecture of the dashboard and no more, and to move the detail into the design stage. I built that prototype in Axure, and took every section of the design that followed through with the client myself.</p>
+    <h2>Solution</h2>
+    <p>The dashboard is full of tables and forms. I proposed reducing form editing to a single click on the field itself wherever that was possible without hurting the experience. It was technically feasible and the client agreed, which left me the job of making that interactivity visible. The same principle scaled to the screens where parameters run into dozens of fields.</p>
+    <p>Every interface element ended up on one page as a UI kit, ready for the designers and developers who came after me.</p>
+    <h2>Where it landed</h2>
+    <p>About 10 months of work, inside my time at No Logo Studio. The dashboard was built and runs in production; getting past the login means being a customer.</p>`,
+
+  primarkt:`
+    <h1>Primarkt Web Platform</h1>
+    <p class="meta">Lead Designer · 2019–2020 · Russia · within No Logo Studio · <a href="https://primarkt.ru">primarkt.ru</a></p>
+    <p class="lead">A property portal for Kaliningrad: buying, selling, renting. The public side is a listings board. Behind it sits a working tool for the people who deal in property daily, realtors, developers and appraisers, built to grow into a CRM.</p>
+    ${cover(COVER_PRIMARKT,"900/667")}
+    <h2>Problem</h2>
+    <p>I came in to redesign the part of the portal that already existed and to design the mobile version, while a new development team refactored the code underneath.</p>
+    <p>What I found was larger than a redesign. The flow through the professional cabinet had never been worked out at prototype stage and had gone into production with its mistakes intact. People walked into dead ends, lost the thread and left the site.</p>
+    <h2>Taking the lead</h2>
+    <p>We reworked those dead ends with the team. Two months in, with the new design concept in place, the size of what was left had become clear, so I proposed bringing in a second interface designer and took on the lead designer role.</p>
+    <p>That changed how the work had to be held together. I broke the single Figma file into one per area, built a design system of universal components both of us could work from across the whole project, and kept it current myself. I wrote the backlog out several months ahead, and we ran to that plan for six months.</p>
+    <h2>What I designed</h2>
+    <p>The homepage and the public listings, with search and filtering on a map, and the detail page behind each listing. The submission flow, prototyped first and then built out as a form.</p>
+    <p>The section for ordering property records from the state register: the first part of the product we monetised, and the one that went through several rounds against how people actually used it.</p>
+    <p>The professional cabinet, section by section: personal data, profile settings, tariff selection, calendar, the inputs behind calculations.</p>
+    <h2>Where it landed</h2>
+    <p>Two designers working from one system instead of one designer working from one file, a backlog planned months out, and a product with its first paying section. No performance numbers were recorded on my side of this work.</p>`,
+
+  contact:`
+    <h1>Get In Touch</h1>
+    <figure class="portrait"><img src="${PORTRAIT}" alt="Anna Sankhip"></figure>
+    <p class="lead">Open to Senior, Lead, or Staff Product Designer roles — fully remote anywhere, or relocation. Full-time or contract.</p>
+    <h2>Reach me</h2>
+    <ul>
+      <li><a href="mailto:anna.sankhip@gmail.com">anna.sankhip@gmail.com</a></li>
+      <li><a href="https://linkedin.com/in/annasankhip">linkedin.com/in/annasankhip</a></li>
+      <li>GMT+8, Philippines and everywhere</li>
+    </ul>
+    <blockquote class="pull">I take things that are complicated underneath and make them feel obvious on the surface</blockquote>`
+};
+
+IMAGES.portrait = PORTRAIT;
+IMAGES.salmon = COVER_SALMON;
+IMAGES.inhouse = COVER_INHOUSE;
+IMAGES.agent = COVER_AGENT;
+IMAGES.portal = COVER_PORTAL;
+IMAGES.referral = COVER_REFERRAL;
+IMAGES.kalda = COVER_KALDA;
+IMAGES.tripment = COVER_TRIPMENT;
+IMAGES.megadisk = COVER_MEGADISK;
+IMAGES.primarkt = COVER_PRIMARKT;
+IMAGES.stormwall = COVER_STORMWALL;
+IMAGES.nologo = COVER_NOLOGO;
+IMAGES.talentum = COVER_TALENTUM;
+
+const HOME = `
+  <div class="home">
+    <p class="eyebrow">00 / Senior Product Designer</p>
+    <h1 class="display">Anna<br>Sankhip</h1>
+    <p class="intro">20 years in design, the last 7 in product. Fintech, healthcare, and B2B products with real operational complexity underneath. Shipped for 3M+ users across three markets.</p>
+  </div>`;
+
+/* ───────────────────────────────────────────────
+   MAP
+   ─────────────────────────────────────────────── */
+const map=document.getElementById("map"), world=document.getElementById("world"),
+      canvas=document.getElementById("field"), ctx=canvas.getContext("2d"),
+      stageEl=document.getElementById("stage");
+const view={x:0,y:0,s:.3};
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+CARDS.forEach(c=>{ c.cx0=c.cx; c.cy0=c.cy; c.ox=0; c.oy=0; c.sc=1; });
+
+CARDS.forEach(c=>{
+  const b=document.createElement("button");
+  b.className="card"; b.dataset.id=c.id;
+  if(c.variant) b.dataset.variant=c.variant;
+  b.style.width=c.w+"px";
+  const media = c.noImage ? "" :
+    c.img ? `<span class="img" style="aspect-ratio:${c.ratio};height:auto"><img src="${IMAGES[c.img]}" alt="" draggable="false"></span>`
+          : `<span class="img"></span>`;
+  b.innerHTML=`<span class="row"><span class="tag">${c.tag}</span><span>${c.n}</span></span>`+
+              `<span class="title">${c.title}</span>`+media;
+  world.appendChild(b); c.el=b;
+});
+const byId=id=>CARDS.find(c=>c.id===id);
+
+/* left/top follow the centre point; transform carries tilt, nudge and hover */
+function placeAll(){ CARDS.forEach(place); }
+function place(c){
+  c.el.style.left=(c.cx-c.el.offsetWidth/2)+"px";
+  c.el.style.top =(c.cy-c.el.offsetHeight/2)+"px";
+  c.el.style.transform=`translate(${c.ox}px,${c.oy}px) rotate(${c.rot}deg) scale(${c.sc})`;
+}
+
+/* hover / open: the focused card grows, its neighbours drift away */
+let hoverId=null, activeId=null;
+function focusCard(){
+  const id=hoverId||activeId, f=id?byId(id):null;
+  CARDS.forEach(c=>{
+    if(!f||c===f){ c.ox=0; c.oy=0; c.sc=(f&&c===f)?1.03:1; }
+    else{
+      const dx=c.cx-f.cx, dy=c.cy-f.cy, d=Math.hypot(dx,dy)||1;
+      const push=60*Math.exp(-d/900);
+      c.ox=dx/d*push; c.oy=dy/d*push; c.sc=1;
+    }
+    place(c);
+  });
+}
+CARDS.forEach(c=>{
+  c.el.addEventListener("pointerenter",()=>{ hoverId=c.id; focusCard(); });
+  c.el.addEventListener("pointerleave",()=>{ if(hoverId===c.id){ hoverId=null; focusCard(); } });
+});
+
+/* ── view: pan, zoom in 3 steps each way, reset ─────────────── */
+let BASE=.5;
+function applyView(){ world.style.transform=`translate(${view.x}px,${view.y}px) scale(${view.s})`; }
+function centerOn(wx,wy){ view.x=map.clientWidth/2-wx*view.s; view.y=map.clientHeight/2-wy*view.s; applyView(); }
+
+/* camera tween — the draw loop advances it, any user gesture cancels it */
+let cam=null;
+function stopCam(){ cam=null; }
+function glideTo(wx,wy,scale,dur=1050){
+  const ts=scale||view.s;
+  const tx=map.clientWidth/2-wx*ts, ty=map.clientHeight/2-wy*ts;
+  if(reduce){ view.x=tx; view.y=ty; view.s=ts; applyView(); return; }
+  cam={x0:view.x,y0:view.y,s0:view.s,tx,ty,ts,t0:performance.now(),dur};
+}
+/* damped spring: soft start, ~2% overshoot, long slow settle */
+const SPR_A=6.6, SPR_B=5.2;
+const sprRaw=k=>1-Math.exp(-SPR_A*k)*(Math.cos(SPR_B*k)+(SPR_A/SPR_B)*Math.sin(SPR_B*k));
+const SPR_N=sprRaw(1);
+function ease(k){ return k>=1 ? 1 : sprRaw(k)/SPR_N; }
+function stepCam(){
+  if(!cam) return;
+  const k=Math.min(1,(performance.now()-cam.t0)/cam.dur);
+  const e=ease(k);
+  view.x=cam.x0+(cam.tx-cam.x0)*e;
+  view.y=cam.y0+(cam.ty-cam.y0)*e;
+  view.s=cam.s0+(cam.ts-cam.s0)*e;
+  applyView();
+  if(k>=1) cam=null;
+}
+function fitBase(){
+  let minX=1e9,minY=1e9,maxX=-1e9,maxY=-1e9;
+  CARDS.forEach(c=>{
+    const w=c.el.offsetWidth/2, h=c.el.offsetHeight/2;
+    minX=Math.min(minX,c.cx0-w); maxX=Math.max(maxX,c.cx0+w);
+    minY=Math.min(minY,c.cy0-h); maxY=Math.max(maxY,c.cy0+h);
+  });
+  const pad=80;
+  const fit=Math.min((map.clientWidth-pad)/(maxX-minX),(map.clientHeight-pad)/(maxY-minY));
+  BASE=Math.min(.55,Math.max(.4,fit*2.2));
+}
+function resetMap(instant){
+  CARDS.forEach(c=>{ c.cx=c.cx0; c.cy=c.cy0; c.ox=0; c.oy=0; c.sc=1; });
+  hoverId=null; placeAll(); fitBase();
+  if(instant){ stopCam(); view.s=BASE; centerOn(0,0); }
+  else glideTo(0,0,BASE);
+}
+
+let panning=false,sx=0,sy=0,moved=0,tapId=null;
+map.addEventListener("pointerdown",e=>{
+  if(e.target.closest(".reset")) return;   // let the control get its own click
+  const el=e.target.closest(".card");
+  tapId = el ? el.dataset.id : null;
+  sx=e.clientX; sy=e.clientY; moved=0;
+  stopCam();
+  panning=true; map.classList.add("dragging");
+  map.setPointerCapture(e.pointerId);
+});
+map.addEventListener("pointermove",e=>{
+  const r=map.getBoundingClientRect();
+  pointer.tx=e.clientX-r.left; pointer.ty=e.clientY-r.top;
+  if(!panning) return;
+  moved=Math.max(moved,Math.abs(e.clientX-sx)+Math.abs(e.clientY-sy));
+  view.x+=e.movementX; view.y+=e.movementY; applyView();
+});
+map.addEventListener("pointerup",()=>{
+  if(tapId&&moved<6) open(tapId);
+  panning=false; tapId=null; map.classList.remove("dragging");
+});
+map.addEventListener("pointerleave",()=>{ pointer.tx=-9999; pointer.ty=-9999; });
+document.getElementById("z-fit").onclick=()=>resetMap();
+
+/* ── generative field + parent→child links ───── */
+const pointer={x:-9999,y:-9999,tx:-9999,ty:-9999};
+function sizeCanvas(){
+  const d=Math.min(2,devicePixelRatio||1);
+  canvas.width=map.clientWidth*d; canvas.height=map.clientHeight*d;
+  ctx.setTransform(d,0,0,d,0,0);
+}
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function screenOf(c){
+  return { x:view.x+(c.cx+c.ox)*view.s, y:view.y+(c.cy+c.oy)*view.s };
+}
+/* three drifting waves at unrelated frequencies — never repeats, never looks like a sine */
+function wavyLine(a,b,phase){
+  const dx=b.x-a.x, dy=b.y-a.y, len=Math.hypot(dx,dy)||1;
+  const nx=-dy/len, ny=dx/len;
+  const segs=Math.max(32,Math.round(len/7));
+  const amp=Math.min(24,len*.06);
+  ctx.beginPath();
+  for(let i=0;i<=segs;i++){
+    const u=i/segs;
+    const taper=Math.sin(Math.PI*u);
+    const w=( Math.sin(u*14.8 - t*.55 + phase)*.52
+            + Math.sin(u*23.3 + t*.37 + phase*1.7)*.31
+            + Math.sin(u*37.1 - t*.24 + phase*2.6)*.17 ) * amp * taper;
+    const x=a.x+dx*u+nx*w, y=a.y+dy*u+ny*w;
+    i?ctx.lineTo(x,y):ctx.moveTo(x,y);
+  }
+  ctx.stroke();
+}
+function drawLinks(){
+  ctx.strokeStyle=css("--paper"); ctx.globalAlpha=.4; ctx.lineWidth=2;
+  ctx.lineJoin="round"; ctx.lineCap="round";
+  CARDS.forEach((c,i)=>{
+    if(!c.parent) return;
+    wavyLine(screenOf(byId(c.parent)),screenOf(c),i*1.3);
+  });
+  ctx.globalAlpha=1; ctx.lineWidth=1;
+}
+const STEP=34,R=165; let t=0;
+function draw(){
+  stepCam();
+  const W=map.clientWidth,H=map.clientHeight;
+  ctx.clearRect(0,0,W,H);
+  pointer.x+=(pointer.tx-pointer.x)*.12; pointer.y+=(pointer.ty-pointer.y)*.12;
+  const base=css("--field"), hi=css("--field-hi");
+  const ox=view.x*.35, oy=view.y*.35;
+  for(let y=STEP/2;y<H;y+=STEP){
+    for(let x=STEP/2;x<W;x+=STEP){
+      const nx=x-ox, ny=y-oy;
+      let a=1.25*(Math.sin(nx*.0062+t*.16)+Math.cos(ny*.0071-t*.13)+Math.sin((nx+ny)*.0039+t*.09));
+      const dx=x-pointer.x, dy=y-pointer.y;
+      const infl=Math.exp(-(dx*dx+dy*dy)/(2*R*R));
+      if(infl>.004){
+        const swirl=Math.atan2(dy,dx)+Math.PI/2;
+        const da=((swirl-a+Math.PI)%(Math.PI*2)+Math.PI*2)%(Math.PI*2)-Math.PI;
+        a+=da*infl;
+      }
+      const len=5+15*infl;
+      ctx.strokeStyle=infl>.12?hi:base;
+      ctx.globalAlpha=.2+.55*infl;
+      ctx.lineWidth=infl>.35?1.4:1;
+      ctx.beginPath();
+      ctx.moveTo(x-Math.cos(a)*len/2,y-Math.sin(a)*len/2);
+      ctx.lineTo(x+Math.cos(a)*len/2,y+Math.sin(a)*len/2);
+      ctx.stroke();
+    }
+  }
+  ctx.globalAlpha=1;
+  drawLinks();
+  if(!reduce) t+=.016;
+  requestAnimationFrame(draw);
+}
+
+/* ───────────────────────────────────────────────
+   PANEL
+   ─────────────────────────────────────────────── */
+function portfolioList(){
+  return `<h1>Portfolio</h1><div class="list">`+
+    CARDS.filter(c=>c.id!=="home"&&c.id!=="contact").map(c=>
+      `<button data-go="${c.id}" class="${c.parent?"sub":""}">`+
+      `<span class="n">${c.n} / ${c.tag}</span><br><span class="t">${c.title}</span></button>`).join("")+
+    `</div>`;
+}
+let current="home";
+function render(id){
+  current=id;
+  if(id==="home"){ stageEl.className="stage"; stageEl.innerHTML=HOME; }
+  else{
+    stageEl.className="stage scrollable";
+    const c=byId(id);
+    const eyebrow=c?`<p class="pageno">${c.n} / ${c.tag}</p>`:"";
+    stageEl.innerHTML="<article>"+(id==="portfolio"?portfolioList():eyebrow+(PAGES[id]||""))+"</article>";
+    stageEl.scrollTop=0;
+  }
+  requestAnimationFrame(edges);
+  CARDS.forEach(c=>c.el.setAttribute("aria-current",c.id===id?"true":"false"));
+  document.querySelectorAll("[data-nav]").forEach(b=>{
+    const on=(b.dataset.nav==="home"&&id==="home")||
+             (b.dataset.nav==="contact"&&id==="contact")||
+             (b.dataset.nav==="portfolio"&&id!=="home"&&id!=="contact");
+    b.setAttribute("aria-current",on);
+  });
+  requestAnimationFrame(()=>moveInk(activeNav()));
+}
+const navEl=document.querySelector(".nav"), footEl=document.querySelector(".foot");
+
+/* the underline slides to whatever is hovered, then back to the active item */
+const navInk=document.getElementById("nav-ink");
+const navBtns=[...document.querySelectorAll("[data-nav]")];
+const activeNav=()=>navBtns.find(b=>b.getAttribute("aria-current")==="true");
+function moveInk(el,hovered){
+  if(!el){ navInk.style.opacity=0; return; }
+  navInk.style.opacity=1;
+  navInk.style.left=el.offsetLeft+"px";
+  navInk.style.width=el.offsetWidth+"px";
+  navInk.style.background=hovered?"var(--accent)":"var(--ink-80)";
+}
+navBtns.forEach(b=>b.addEventListener("pointerenter",()=>moveInk(b,true)));
+document.querySelector(".nav-links").addEventListener("pointerleave",()=>moveInk(activeNav()));
+addEventListener("resize",()=>moveInk(activeNav()));
+function edges(){
+  const el=stageEl, room=el.scrollHeight-el.clientHeight;
+  navEl.classList.toggle("edge", el.scrollTop>2);
+  footEl.classList.toggle("edge", room-el.scrollTop>2);
+}
+stageEl.addEventListener("scroll",edges);
+addEventListener("resize",edges);
+
+function open(id){
+  render(id);
+  const c=byId(id);
+  activeId=c?id:null; focusCard();
+  if(c&&innerWidth>900) glideTo(c.cx,c.cy);
+}
+stageEl.addEventListener("click",e=>{
+  const b=e.target.closest("[data-go]"); if(b) open(b.dataset.go);
+});
+document.querySelectorAll("[data-nav]").forEach(b=>{
+  b.onclick=()=>{
+    const n=b.dataset.nav;
+    if(n==="home"){ render("home"); activeId=null; focusCard(); resetMap(); }
+    else if(n==="contact") open("contact");
+    else render("portfolio");
+  };
+});
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") render("home"); });
+
+/* theme */
+const modeBtn=document.getElementById("mode");
+function paintIcon(){
+  modeBtn.innerHTML=document.documentElement.dataset.theme==="dark"?ICON_DARK:ICON_LIGHT;
+}
+modeBtn.onclick=()=>{
+  const d=document.documentElement.dataset.theme==="dark";
+  document.documentElement.dataset.theme=d?"light":"dark";
+  paintIcon();
+};
+
+/* boot */
+addEventListener("resize",()=>{ sizeCanvas(); fitBase(); });
+document.getElementById("z-fit").innerHTML=ICON_RESET;
+sizeCanvas(); paintIcon(); render("home"); resetMap(true); draw();
+</script>
+</body>
+</html>
