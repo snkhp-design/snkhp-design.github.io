@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" id="theme-color" content="#E5E3DE">
 <title>Anna Sankhip — Senior Product Designer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -971,16 +972,21 @@ const modeBtn=document.getElementById("mode");
 function paintIcon(){
   modeBtn.innerHTML=document.documentElement.dataset.theme==="dark"?ICON_DARK:ICON_LIGHT;
 }
+const themeColorMeta=document.getElementById("theme-color");
+function syncThemeColor(){
+  themeColorMeta.setAttribute("content", getComputedStyle(document.documentElement).getPropertyValue("--paper").trim());
+}
 modeBtn.onclick=()=>{
   const d=document.documentElement.dataset.theme==="dark";
   document.documentElement.dataset.theme=d?"light":"dark";
   paintIcon();
+  syncThemeColor();
 };
 
 /* boot */
 addEventListener("resize",()=>{ sizeCanvas(); fitBase(); });
 document.getElementById("z-fit").innerHTML=ICON_RESET;
-sizeCanvas(); paintIcon(); render("home"); resetMap(true); draw();
+sizeCanvas(); paintIcon(); syncThemeColor(); render("home"); resetMap(true); draw();
 </script>
 </body>
 </html>
