@@ -22,6 +22,8 @@
   --field-hi:#E5E3DE;
   --display:"Bebas Neue","Oswald",Impact,sans-serif;
   --mono:"Fira Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --noise-content:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='480'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  --noise-map:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='480'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.28'/%3E%3C/svg%3E");
 }
 [data-theme="dark"]{
   --paper:#22201B;
@@ -35,6 +37,8 @@
   --slot-alt:#443F35;
   --field:#4A473F;
   --field-hi:#E8E9E2;
+  --noise-content:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='480'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.2'/%3E%3C/svg%3E");
+  --noise-map:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='480'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.2'/%3E%3C/svg%3E");
 }
 *{box-sizing:border-box}
 html,body{height:100%}
@@ -45,6 +49,9 @@ body{
   transition:background .3s ease,color .3s ease;
 }
 button{font:inherit;color:inherit;background:none;border:none;padding:0;cursor:pointer}
+@media (hover:hover) and (pointer:fine){
+  button, a, [data-go]{cursor:pointer}
+}
 a{color:inherit;text-decoration:none;font-weight:500;transition:color .15s ease}
 a:hover{color:var(--accent)}
 :focus-visible{outline:2px solid var(--ink);outline-offset:3px}
@@ -54,6 +61,7 @@ a:hover{color:var(--accent)}
 /* ── content panel (left) ───────────────────── */
 .content{
   width:600px;max-width:44vw;flex:none;background:var(--paper);
+  background-image:var(--noise-content);background-size:480px 480px;
   display:flex;flex-direction:column;justify-content:space-between;
   padding:40px;overflow:hidden;transition:background .3s ease;
 }
@@ -91,8 +99,8 @@ a:hover{color:var(--accent)}
   font-family:var(--display);font-weight:400;text-transform:uppercase;
   color:var(--ink);letter-spacing:.04em;line-height:.875;margin:0;
 }
-.home .display{font-size:clamp(56px,7.2vw,128px)}
-.intro{color:var(--ink-80);margin:24px 0 0}
+.home .display{font-size:clamp(96px,calc(34.3px + 6.86vw),144px)}
+.intro{color:var(--ink-80);margin:24px 0 0;max-width:600px}
 
 .foot{display:flex;align-items:center;justify-content:space-between;flex:none;
   padding-top:16px;border-top:1px solid transparent;transition:border-color .2s ease}
@@ -107,7 +115,7 @@ a:hover{color:var(--accent)}
 /* ── article typography ─────────────────────── */
 article h1{font-family:var(--display);font-weight:400;text-transform:uppercase;letter-spacing:.04em;line-height:.9;font-size:clamp(38px,4.4vw,64px);margin:0 0 40px}
 article h2{font-family:var(--display);font-weight:400;text-transform:uppercase;letter-spacing:.04em;font-size:24px;line-height:24px;margin:64px 0 20px}
-article p{margin:0 0 24px;color:var(--ink-80)}
+article p{margin:0 0 24px;color:var(--ink-80);max-width:600px}
 article .lead{color:var(--ink)}
 article ul{margin:0 0 24px;padding:0;list-style:none}
 article li{position:relative;padding-left:18px;margin-bottom:8px;color:var(--ink-80)}
@@ -115,8 +123,18 @@ article li::before{content:"—";position:absolute;left:0}
 article .note{color:var(--ink-80);border-left:1px solid var(--edge);padding-left:12px}
 .pageno{font-size:12px;color:var(--ink-80);margin:0 0 12px}
 .meta{font-size:12px;color:var(--ink-80);margin:0 0 40px;text-transform:lowercase}
-.figures{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--edge);border:1px solid var(--edge);margin:32px 0}
-.fig{background:var(--paper);padding:14px}
+.figures{display:grid;grid-template-columns:repeat(2,minmax(0,300px));gap:1px;background:var(--edge);border:1px solid var(--edge);margin:32px 0}
+.fig{background:var(--paper);background-image:var(--noise-content);background-size:480px 480px;padding:14px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 32px}
+.chip{border:1px solid var(--edge);border-radius:2px;padding:4px 10px;font-size:12px;line-height:16px;color:var(--ink-80);text-transform:lowercase;white-space:nowrap}
+.casenav{display:flex;justify-content:space-between;gap:24px;margin:64px 0 0}
+.casenav-btn{background:none;padding:4px 0;text-align:left}
+.casenav-btn.next{text-align:right}
+.casenav-btn .n{display:block;font-size:12px;color:var(--ink-80);transition:color .15s ease}
+.casenav-btn .t{display:block;font-family:var(--display);font-weight:400;font-size:22px;line-height:1.05;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);transition:color .15s ease}
+.casenav-btn:hover .n,
+.casenav-btn:hover .t{color:var(--accent)}
+@media (max-width:520px){.casenav{flex-direction:column;gap:32px}.casenav-btn.next{text-align:left}}
 .figures .fig:last-child:nth-child(odd){grid-column:1 / -1}
 .fig b{display:block;font-family:var(--display);font-weight:400;font-size:44px;line-height:1;letter-spacing:.04em}
 .fig span{display:block;font-size:14px;color:var(--ink-80);margin-top:8px;line-height:20px}
@@ -151,26 +169,30 @@ article .note{color:var(--ink-80);border-left:1px solid var(--edge);padding-left
 .list .n{font-size:12px;color:var(--ink-80);transition:color .15s ease}
 .list .t{font-family:var(--display);font-size:24px;line-height:24px;letter-spacing:.04em;text-transform:uppercase;transition:color .15s ease}
 .list button:hover .t,
-.list button:hover .n{color:var(--accent)}
+.list button:hover .n,
+.list button.peer-hover .t,
+.list button.peer-hover .n{color:var(--accent)}
 .list .sub{padding-left:24px}
 
 /* ── map (right) ────────────────────────────── */
 .map{flex:1;min-width:0;position:relative;overflow:hidden;touch-action:none;cursor:grab;
-  background:var(--stage);transition:background .3s ease;user-select:none;-webkit-user-select:none}
+  background:var(--stage);background-image:var(--noise-map);background-size:480px 480px;
+  transition:background .3s ease;user-select:none;-webkit-user-select:none}
 .map img{-webkit-user-drag:none;user-drag:none;pointer-events:none}
 .map.dragging{cursor:grabbing}
-.map::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px 180px;opacity:.07}
 #field{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1}
 #world{position:absolute;top:0;left:0;transform-origin:0 0;will-change:transform;z-index:2}
 
 .card{
   position:absolute;display:flex;flex-direction:column;gap:8px;align-items:flex-start;
-  background:var(--paper);border-radius:8px;padding:16px;overflow:hidden;text-align:left;
+  background:var(--paper);background-image:var(--noise-map);background-size:480px 480px;
+  border-radius:8px;padding:16px;overflow:hidden;text-align:left;
   touch-action:none;will-change:transform;
   transition:transform .55s cubic-bezier(.22,.61,.36,1),box-shadow .2s ease,background .3s ease;
 }
-.card:hover{box-shadow:0 0 0 1px var(--ink-24)}
+.card:hover{box-shadow:0 0 0 2px var(--accent)}
+.card:hover .row,
+.card:hover .title{color:var(--accent)}
 .card .row{display:flex;justify-content:space-between;width:100%;font-size:20px;line-height:normal;color:var(--ink-80);white-space:nowrap;gap:12px}
 .card .row .tag{overflow:hidden;text-overflow:ellipsis}
 .card .title{font-family:var(--display);font-weight:400;font-size:40px;line-height:40px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);width:100%}
@@ -185,12 +207,15 @@ article .note{color:var(--ink-80);border-left:1px solid var(--edge);padding-left
 .reset:hover{opacity:.6}
 .reset svg{width:24px;height:24px;display:block}
 
-@media (max-width:900px){
+@media (max-width:900px), (max-height:560px){
   body{overflow:auto}
   .app{display:block;height:auto}
-  .content{width:100%;max-width:none;padding:24px;height:auto}
-  .nav{position:sticky;top:0;z-index:30;background:var(--paper);padding-top:24px;margin-top:-24px}
-  .stage{padding:32px 0;margin-right:0}
+  .content{width:100%;max-width:none;padding:16px 24px 24px;height:auto;overflow:visible}
+  .nav{position:sticky;top:0;z-index:30;background:var(--paper);background-image:var(--noise-content);background-size:480px 480px;padding-top:16px;margin-top:-16px}
+  .stage{padding:48px 0 32px;margin-right:0}
+  article h1{margin-bottom:24px}
+  article h2{margin-top:48px}
+  .home .display{font-size:clamp(96px,calc(78.9px + 4.57vw),120px)}
   .map{height:60vh}
   .reset{left:24px;bottom:24px}
   }
@@ -288,6 +313,23 @@ const scroller = (src,caption) =>
   `<figure class="scroller"><img src="${src}" alt="" loading="lazy" decoding="async"><figcaption>${caption}</figcaption></figure>`;
 
 const cover = (src,ratio) => `<figure class="cover" style="aspect-ratio:${ratio}"><img src="${src}" alt="" loading="lazy" decoding="async"></figure>`;
+
+const SKILLS_CONTACT = ["Product Design","0→1 Design","Design Systems","Fintech","User Research","Usability Testing","Prototyping","Figma","Low-code (Retool, Appsmith)","AI-assisted workflows","Cross-platform (Web, iOS, Android)","Design Leadership & Mentoring","Cross-functional Collaboration","Copywriting"];
+
+const CASE_SKILLS = {
+  salmon:["0→1 Design","Low-code (Retool, Appsmith)","Design Systems","Design Leadership","Fintech"],
+  inhouse:["Low-code (Retool, Appsmith)","0→1 Design","Internal Tools","Design Systems","Cross-functional Collaboration"],
+  agent:["Field Research","Behavioral Design","Gamification","Mobile Design","Fintech"],
+  portal:["Onboarding Design","Compliance / KYC Flows","Fintech","Design Systems","Low-code to Native Migration"],
+  referral:["User Research","Usability Testing","Behavioral Design","Prototyping","Fintech"],
+  kalda:["Accessibility","Wellbeing UX","Responsive Design","Visual Design"],
+  talentum:["Multi-role Design","Design Systems (Theming)","Web3","Gamification","Responsive Design"],
+  tripment:["Healthcare UX","Marketplace Design","Design Systems","Search & Navigation"],
+  megadisk:["Cross-platform (Web, iOS, Android)","Usability Testing","Design Systems","0→1 Design"],
+  nologo:["Team Leadership & Mentoring","Client-facing Design","Responsive Web Design","Visual Design"],
+  primarkt:["Design Systems","Team Leadership","Multi-role Design","Web Design"],
+  stormwall:["B2B / Enterprise UX","Data-dense UI","Prototyping","Domain Research"]
+};
 
 const PAGES = {
   salmon:`
@@ -565,6 +607,8 @@ const PAGES = {
     <h1>Get In Touch</h1>
     <figure class="portrait"><img src="${PORTRAIT}" alt="Anna Sankhip" loading="lazy" decoding="async"></figure>
     <p class="lead">Open to Senior, Lead, or Staff Product Designer roles — fully remote anywhere, or relocation. Full-time or contract.</p>
+    <h2>Skills</h2>
+    <div class="tags">${SKILLS_CONTACT.map(s=>`<span class="chip">${s}</span>`).join("")}</div>
     <h2>Reach me</h2>
     <ul>
       <li><a href="mailto:anna.sankhip@gmail.com">anna.sankhip@gmail.com</a></li>
@@ -591,8 +635,9 @@ IMAGES.talentum = COVER_TALENTUM;
 const HOME = `
   <div class="home">
     <p class="eyebrow">00 / Senior Product Designer</p>
-    <h1 class="display">Anna<br>Sankhip</h1>
+    <h1 class="display">Anna Sankhip</h1>
     <p class="intro">20 years in design, the last 7 in product. Fintech, healthcare, and B2B products with real operational complexity underneath. Shipped for 3M+ users across three markets.</p>
+    <p class="intro">Research before screens, design systems in Figma, prototypes on low-code. AI agents built into the process — faster delivery, quicker hypothesis testing.</p>
   </div>`;
 
 /* ───────────────────────────────────────────────
@@ -642,9 +687,16 @@ function focusCard(){
     place(c);
   });
 }
+function portfolioRow(id){ return current==="portfolio" ? stageEl.querySelector(`[data-go="${id}"]`) : null; }
 CARDS.forEach(c=>{
-  c.el.addEventListener("pointerenter",()=>{ hoverId=c.id; focusCard(); });
-  c.el.addEventListener("pointerleave",()=>{ if(hoverId===c.id){ hoverId=null; focusCard(); } });
+  c.el.addEventListener("pointerenter",()=>{
+    hoverId=c.id; focusCard();
+    const row=portfolioRow(c.id); if(row) row.classList.add("peer-hover");
+  });
+  c.el.addEventListener("pointerleave",()=>{
+    if(hoverId===c.id){ hoverId=null; focusCard(); }
+    const row=portfolioRow(c.id); if(row) row.classList.remove("peer-hover");
+  });
 });
 
 /* ── view: pan, zoom in 3 steps each way, reset ─────────────── */
@@ -801,16 +853,60 @@ function portfolioList(){
       `<span class="n">${c.n} / ${c.tag}</span><br><span class="t">${c.title}</span></button>`).join("")+
     `</div>`;
 }
+
+/* sequential prev/next through the case pages, in numbering order, wrapping at both ends */
+const CASE_ORDER=CARDS.filter(c=>c.id!=="home"&&c.id!=="contact").map(c=>c.id);
+function caseNavHTML(id){
+  const i=CASE_ORDER.indexOf(id);
+  if(i<0) return "";
+  const prev=byId(CASE_ORDER[(i-1+CASE_ORDER.length)%CASE_ORDER.length]);
+  const next=byId(CASE_ORDER[(i+1)%CASE_ORDER.length]);
+  const btn=(c,dir)=>`<button class="casenav-btn ${dir}" data-go="${c.id}">`+
+    `<span class="n">${dir==="prev"?`← ${c.n} / ${c.tag}`:`${c.n} / ${c.tag} →`}</span>`+
+    `<span class="t">${c.title}</span></button>`;
+  return `<div class="casenav">${btn(prev,"prev")}${btn(next,"next")}</div>`;
+}
+
 let current="home";
+let portfolioScroll=0;
+/* mirrors the CSS breakpoint: narrow width OR short height (landscape phones) both fall back to the stacked, scrollable layout */
+function isCompact(){ return innerWidth<=900 || innerHeight<=560; }
+/* on mobile/compact the whole page scrolls (see .content in that media query); on desktop only .stage does */
+function scrollPos(){ return isCompact() ? (document.documentElement.scrollTop||window.scrollY||0) : stageEl.scrollTop; }
+function setScrollPos(v){ if(isCompact()) window.scrollTo(0,v); else stageEl.scrollTop=v; }
+
 function render(id){
+  if(current==="portfolio"&&id!=="portfolio") portfolioScroll=scrollPos();
   current=id;
-  if(id==="home"){ stageEl.className="stage"; stageEl.innerHTML=HOME; }
+  if(id==="home"){ stageEl.className="stage"; stageEl.innerHTML=HOME; setScrollPos(0); }
   else{
     stageEl.className="stage scrollable";
     const c=byId(id);
     const eyebrow=c?`<p class="pageno">${c.n} / ${c.tag}</p>`:"";
-    stageEl.innerHTML="<article>"+(id==="portfolio"?portfolioList():eyebrow+(PAGES[id]||""))+"</article>";
-    stageEl.scrollTop=0;
+    const caseNav=CASE_ORDER.includes(id)?caseNavHTML(id):"";
+    stageEl.innerHTML="<article>"+(id==="portfolio"?portfolioList():eyebrow+(PAGES[id]||"")+caseNav)+"</article>";
+    if(CASE_SKILLS[id]){
+      const metaEl=stageEl.querySelector(".meta");
+      if(metaEl) metaEl.insertAdjacentHTML("afterend",
+        `<div class="tags">${CASE_SKILLS[id].map(s=>`<span class="chip">${s}</span>`).join("")}</div>`);
+    }
+    setScrollPos(id==="portfolio"?portfolioScroll:0);
+    if(id==="portfolio"){
+      /* hover a row → glide the map to that card; hover a card → highlight the matching row (see CARDS pointerenter above) */
+      stageEl.querySelectorAll("[data-go]").forEach(btn=>{
+        const cid=btn.dataset.go;
+        btn.addEventListener("pointerenter",()=>{
+          if(isCompact()) return;
+          hoverId=cid; focusCard();
+          const cc=byId(cid); if(cc) glideTo(cc.cx,cc.cy);
+        });
+        btn.addEventListener("pointerleave",()=>{
+          if(isCompact()) return;
+          if(hoverId===cid){ hoverId=null; focusCard(); }
+        });
+      });
+      activeId=null; hoverId=null; focusCard(); glideTo(0,0,BASE);
+    }
   }
   requestAnimationFrame(edges);
   CARDS.forEach(c=>c.el.setAttribute("aria-current",c.id===id?"true":"false"));
@@ -839,18 +935,23 @@ navBtns.forEach(b=>b.addEventListener("pointerenter",()=>moveInk(b,true)));
 document.querySelector(".nav-links").addEventListener("pointerleave",()=>moveInk(activeNav()));
 addEventListener("resize",()=>moveInk(activeNav()));
 function edges(){
-  const el=stageEl, room=el.scrollHeight-el.clientHeight;
-  navEl.classList.toggle("edge", el.scrollTop>2);
-  footEl.classList.toggle("edge", room-el.scrollTop>2);
+  if(isCompact()){
+    navEl.classList.toggle("edge", scrollPos()>2);
+  }else{
+    const room=stageEl.scrollHeight-stageEl.clientHeight;
+    navEl.classList.toggle("edge", stageEl.scrollTop>2);
+    footEl.classList.toggle("edge", room-stageEl.scrollTop>2);
+  }
 }
 stageEl.addEventListener("scroll",edges);
+addEventListener("scroll",edges);
 addEventListener("resize",edges);
 
 function open(id){
   render(id);
   const c=byId(id);
   activeId=c?id:null; focusCard();
-  if(c&&innerWidth>900) glideTo(c.cx,c.cy);
+  if(c&&!isCompact()) glideTo(c.cx,c.cy);
 }
 stageEl.addEventListener("click",e=>{
   const b=e.target.closest("[data-go]"); if(b) open(b.dataset.go);
